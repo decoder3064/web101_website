@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- head
+
+        Purpose:
+        - Title used here shows up in the browser tab
+        - Link to the favicon (small image that appears in the browser tab)
+        - Link to the CSS file (used to style the webpage)
+
+        When To Modify:
+        - [ ] Project 2 (REQUIRED FEATURE) 
+        - [ ] Project 2 (STRETCH FEATURE) (favicon)
+        - [ ] Any time after 
+        -->
+        <link rel="stylesheet" href="styles.css">
+        <title>[ENTRE RUNNERS]</title>
+        <link rel="icon" href="./img/logo_icon.png">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+    
+    <body>
+
+        <!-- navbar
+
+        Purpose:
+        - Navigation bar that allows users to jump to different sections of the webpage
+        - Also holds buttons for user settings (dark mode, reduce motion)
+
+        When To Modify:
+        - [ ] Project 4 (REQUIRED FEATURE)
+        - [ ] Project 5 (REQUIRED FEATURE) 
+        - [ ] Project 8 (STRETCH FEATURE) 
+        - [ ] Any time between / after
+        -->
+        <div class="navbar">
+            <div><img id="navbar-img" src="./img/logo_icon.png"></div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#next-trainings">Next Trainings</a></li>
+                <li><a href="#video">Video!</a></li>
+                <li><a href="#rsvp">Get in Touch</a></li>
+                <button id="theme-button">Light Mode</button>
+            </ul>
+        </div>
+    
+
+        <!-- headings
+
+        Purpose:
+        - Main header section of the webpage
+        - Contains the title, subtitle, image, and key buttons for the webpage
+
+        When To Modify:
+        - [X] Project 2 (REQUIRED FEATURE) 
+        - [ ] Project 3 (REQUIRED FEATURE) 
+        - [ ] Project 4 (REQUIRED FEATURE) 
+        - [ ] Any time after
+        -->
+        <header class="header-container">
+            <div>
+                <img class="header-logo" src="./img/Website_run your own race.png" />
+                <button  class="header-button"> See next trainings</button>
+            </div>
+        </header>
+        
+
+        <!-- about
+        Purpose:
+        - Section for general info about the event
+        - Contains a video, description, and key points about the event
+        When To Modify:
+        - [x] Project 2 (REQUIRED FEATURE) 
+        - [x] Project 2 (STRETCH FEATURE) 
+        - [x] Project 4 (STRETCH FEATURE) 
+        - [ ] Any time between / after
+        --> 
+        <main><!--change this -->
+            <div id="about">
+                <div class="about-img-container">
+                    <img class="about-img" src="./img/who_are_we.png" /> 
+                </div>
+                <div class ="about-title-container">
+                    <h2 class="about-title1">QUIENES</h2>
+                    <h2 class="about-title2">SOMOS?</h2>
+                </div>
+                <div class="about-txt-contianer">
+                    <p class="about-txt">Welcome to Entren Runners — a community of people passionate about what we love most: running. 
+                    We meet in different parts of El Salvador to share routes full of energy, motivation, and camaraderie. 
+                    With the support of our sponsors, we provide hydration, guided training, and unique experiences at every meeting. 
+                    Whether you're a beginner or an experienced runner, here you'll find a space to grow, enjoy, and never run alone.
+                </p>
+            </div>
+            </div>
+            <div class = "carousel">
+                <ul class="car-items">
+                    <li> <b>Guided trainings |</b></li>
+                    <li> <b>Motivating Community |</b></li>
+                    <li> <b>Safe and Organized Routes </b> </li>
+                </ul>
+            </div>
+
+            <!-- schedule
+
+            Purpose:
+            - Section for specific info about the event's schedule
+            - Contains images and descriptions of each activity
+
+            When To Modify:
+            - [x] Project 2 (REQUIRED FEATURE) 
+            - [x] Project 4 (STRETCH FEATURE) 
+            - [x] Any time between / after
+            --> 
+            <div class="video-section" id="video">
+                <h3>Video</h3>
+                <iframe src="https://www.youtube.com/embed/gjAGf7kHTuA"></iframe>
+                <button type="button" class="other-button">See next training</button>
+                <button type="button" class="other-button">Open Location</button>
+            </div>
+            <!-- rsvp [PLACEHOLDER] [ADDED IN UNIT 6] -->
+
+            <!-- rsvp
+
+            Purpose:
+            - Section for users to sign up for the event
+            - Contains a form for users to input their information, 
+            and a list of other users who have signed up
+
+            When To Modify:
+            - [ ] Project 6 (REQUIRED FEATURE) 
+            - [ ] Project 6 (STRETCH FEATURE) 
+            - [ ] Any time after
+            --> 
+            <div id="rsvp">
+                <h2>Contact us!</h2>
+                <div class="rsvp-container">
+                    <div class="rsvp-para">
+                        <!-- info goes here -->
+                         <p>Interested in joining EntreRunners? RSVP now to let us know you're coming! 
+                            This is a free event—no attendance taken, just come ready to connect, share ideas, and get inspired. 
+                            Fill out the form below to save your spot and stay in the loop!</p>
+
+                    </div>
+                    <div class="rsvp-participants">
+                        <p>👟 David from Seattle will run on the next training!</p>
+                        <p>👟 Karla from Naerobi will run on the next training!</p>
+                        <p>👟 Teresa from Berlin will run on the next training!</p>
+                    </div>
+                </div>
+
+                <!--- Sign RSVP Form ---> 
+                <div class="form-container">
+                    <form id="rsvp-form" title="rsvp-form">
+                        <!-- form inputs go here -->
+                         <input type="text" id="name" placeholder="name"/>
+                         <input type="email" id="email" placeholder="email"/>
+                         <!-- <input type="text" id="message" placeholder="message"></input> -->
+                         <input type="text" id="country" placeholder="country"/>
+                        
+                    </form>
+                    <!-- Submit button -->
+                    <button type="submit" id="rsvp-b" class="other-button">Submit RSVP</button>
+                </div>      
+            </div>
+
+            <!-- success modal
+
+            Purpose:
+            - Modal that appears when a user successfully signs up for the event
+            - Contains a personalized message and image
+
+            When To Modify:
+            - [ ] Project 9 (REQUIRED FEATURE)
+            - [ ] Project 9 (STRETCH FEATURE) 
+            - [ ] Any time after
+            --> 
+            <!-- success modal [PLACEHOLDER] [ADDED IN UNIT 9] --> 
+            <div id="success-modal" class="modal">
+                <div class="modal-container">
+                    <div id="modal-item">
+                        <p id ="modal-text">placeholder</p>
+                    </div>
+                    <div id="modal-item">
+                        <img id="modal-img" src="./img/logo_icon.png">
+                    </div>
+                </div>
+            </div>
+
+            <!-- links
+
+            Purpose:
+            - Links to other resources related to the event
+
+            When To Modify:
+            - [ ] Project 2 (STRETCH FEATURE) 
+            - [ ] Project 4 (STRETCH FEATURE) 
+            - [ ] Any time between / after
+            --> 
+        <main>
+        
+
+        
+            
+        <!-- footer [PLACEHOLDER] [ADDED IN UNIT 3] -->
+        <footer class="footer"><!-- This <a> block is one link.  Copy and paste all 6 lines to create another link. -->
+            <div class="footer-content">
+                <div class="footer-right">
+                    <img id = "footer-img" src="./img/logo_icon.png"/> 
+                    <p class="footer-text">Entre Runners El Salvador</p>
+                </div>
+
+            
+                <div class = "footer-right">
+                    <a class="block" href="https://www.instagram.com/entrerunners/?hl=en">
+                        <article>
+                            <img class="social-media" src="./img/Website_Instagram.png" />
+                        </article>
+                    </a>
+                    <a class="block" href="https://www.facebook.com/entrerunners.sv/">
+                        <article>
+                            <img class="social-media" src="./img/Website_facebook.png" />
+                        </article>
+                    </a>
+                </div>
+            </div>
+        </footer>
+        <!-- script [PLACEHOLDER] [ADDED IN UNIT 5] -->
+        <script src="index.js"></script>
+
+    </body>
+</html>

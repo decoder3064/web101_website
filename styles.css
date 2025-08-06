@@ -1,0 +1,541 @@
+/*** VSCodeEDU preview fix 
+
+  Purpose:
+  - Fix VSCodeEDU issue that causes a white border to show around
+    the preview window
+
+  When To Modify:
+  - If you change the background color of your webpage, you may need to update this rule too.
+***/
+html {
+    background-color: var(--bg-color-dark-mode);
+}
+
+
+
+/*** body ***
+  
+  Purpose:
+  - Add style rules for the body of your webpage
+  - This is useful if you want a rule to apply to EVERYTHING on your page
+    - (Tip: You can always override these rules later in the stylesheet)
+
+  When To Modify:
+  - [ ] Project 3 (REQUIRED FEATURE) 
+  - [ ] Any time after
+***/
+
+body {
+    /* Add a background color or image */
+    background-color: var(--bg-color); /* see bottom of file for color variables */
+
+    /* Customize the default size, color, and font for text*/
+    font-size: 16px;
+    color: var(--text-color);
+    font-family: "Montserrat",sans-serif;/* This tells the browser: "Try to use `Tahoma`, and if you can't find it, use any sans-serif font." */
+
+    /* Put space around the edges of the webpage */
+    margin: 0px;
+    margin-right: 0px;
+}
+
+/*** Text ***
+  
+  Purpose: 
+  - Add style rules for headings (h1-6),
+    paragraphs (p), links (a), and buttons
+
+  When To Modify:
+  - [X] Project 3 (REQUIRED FEATURE) 
+  - [ ] Any time after
+***/
+
+
+h2 {
+  color: aliceblue;
+
+}
+
+h3{
+  color: aliceblue;
+}
+
+p{
+  color: aliceblue;
+}
+
+#about{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.about-img{
+  display: flex;
+  width: 300px;
+}
+.about-title1{
+  font-size: 70px;
+  font-family: "Bebas Neue", sans-serif;
+  color: transparent; /* hides fill */
+  -webkit-text-stroke: .01px white; /* outline width + color */
+  text-transform: uppercase;
+}
+.about-title2{
+  font-size: 100px;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: none;
+  margin-right: 30px;
+}
+
+.about-txt-cotainer{
+  display: flex;
+  width: 400px;
+  justify-content: center;
+}
+.about-txt{
+  display: flex;
+  align-items: center;
+
+}
+
+/*pass this to javascript to make it interactive*/
+.carousel{
+  background-color: var(--accent-color-celeste);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.car-items{
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  color: #0b0a0a;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  list-style-type: none;
+  font-family:"Bebas Neue", sans-serif; 
+  font-size: 50px;
+  font-weight:lighter;
+}
+
+#next-trainings{
+
+}
+
+#get-in-touch-form{
+}
+
+input{
+  display: block;
+}
+
+
+button:hover {
+  color: #28eb76;
+    /* Make the button look different when the user hovers over it */
+}
+
+.video-section{
+  margin-bottom: 10px;
+
+}
+
+#next-training{
+  margin-top: 100px;
+  margin-bottom:100px;
+  
+}
+
+.form-container{
+  margin-bottom: 100px;
+}
+
+/*** header ***
+  
+  Purpose:
+  - Add style rules for your website's header section
+
+  When To Modify:
+  - [X] Project 3 (REQUIRED FEATURE) 
+  - [ ] Project 4 (REQUIRED FEATURE) 
+  - [ ] Any time after
+***/
+
+.header-container { /* Example A: This styles elements with class="header" */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background-image: url('img/header_background.png');
+  background-size: cover;
+  background-position: center;
+  width: 100%;  
+  padding-bottom: 100px ; 
+  height: auto;
+  text-align: center;
+;
+}
+
+
+
+.header-logo:nth-of-type(1){
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 350px;
+  padding: 20px;
+  max-width: 700px;
+}
+
+.header-button{
+  /* Example Style, replace with your own! */
+  background-color: var(--accent-color-gray);
+  color:var(--accent-color-celeste);
+  border: none;     
+  padding: 5px 12px;          
+  border-radius: 15px;         
+  cursor: pointer;
+  font-family:"Bebas Neue", sans-serif; 
+  width: 200px;
+  height: 40px;
+  letter-spacing: 0.5px;
+  font-size: large;
+}
+
+.other-button{
+  margin: 3px;
+  background-color: var(--accent-color-gray);
+  color:var(--accent-color-celeste);
+  border: none;     
+  padding: 5px 12px;          
+  border-radius: 15px;         
+  cursor: pointer;
+  font-family:"Bebas Neue", sans-serif; 
+  width: 150px;
+  height: 30px;
+  font-size: medium;
+  letter-spacing: 0.5px
+
+}
+
+
+
+/*** footer ***
+  
+  Purpose:
+  - Add style rules for your website's footer section
+
+  When To Modify:
+  - [ ] Project 3 (STRETCH FEATURE) 
+  - [ ] Any time after
+***/
+
+.footer { /* Example B: This styles elements with class="footer" */
+  background-color: #494949;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+.footer-content{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-right{
+  display: flex;
+  align-items: center;
+}
+.footer-left{
+  display: flex;
+  align-items: center;
+  justify-self: start;
+}
+
+.social-media{
+  width: 40px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.social-media:hover {
+  filter: brightness(0.8) invert(1);
+}
+#footer-img{
+  width: 100px;
+  margin-left: 50px;
+  margin-top: -15px;
+  margin-bottom: -15px;
+  margin-right: 30px;
+}
+
+
+/*** Navbar [PLACEHOLDER] [ADDED IN UNIT 4] ***/
+
+/*** Navigation bar (navbar) ***
+  
+  Purpose:
+  - Add style rules for your website's navbar
+
+  When To Modify:
+  - [x] Project 4 (REQUIRED FEATURE) 
+  - [ ] Any time after
+***/
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin: 20px;
+}
+
+
+.navbar ul li {
+  list-style-type: none;
+  margin: 0 20px;
+}
+
+.navbar ul li a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  
+}
+
+.navbar ul li a:hover {
+  color: var(--accent-color-green);
+}
+
+#navbar-img{
+  margin-left: 50px;
+  margin-right:50px;
+  width: 80px;
+}
+
+
+
+/*** About Section ***
+  
+  Purpose:
+  - Add style rules for your website's About section
+
+  When To Modify:
+  - [X] Project 3 (OPTIONAL)
+  - [ ] Project 4 (STRETCH FEATURE) 
+  - [ ] Any time after
+***/
+
+
+/*** Schedule Section ***
+  
+  Purpose:
+  - Add style rules for your website's Schedule section
+
+  When To Modify:
+  - [X] Project 3 (OPTIONAL)
+  - [ ] Project 4 (STRETCH FEATURE) 
+  - [ ] Any time after
+***/
+
+
+/*** Links Section ***
+  
+  Purpose:
+  - Add style rules for your website's Links section
+
+  When To Modify:
+  - [X] Project 3 (OPTIONAL)
+  - [ ] Project 4 (STRETCH FEATURE) 
+  - [ ] Any time after
+***/
+
+
+/*** RSVP [PLACEHOLDER] [ADDED IN UNIT 6] ***/
+/*** RSVP Section ***
+  
+  Purpose:
+  - Add style rules for your website's RSVP form
+
+  When To Modify:
+  - [ ] Project 6 (REQUIRED FEATURE)
+  - [ ] Project 7 (REQUIRED FEATURE)
+  - [ ] Any time after
+***/
+
+.rsvp-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px; 
+  width: 100%;
+  padding-bottom: -1;
+}
+
+.rsvp-para{
+  color: white;
+  width: 55%;
+  padding-right: 10px;
+}
+
+.rsvp-participants{
+  width: 45%;
+  padding-right: 10px;
+}
+
+.form-container{
+  display: flex;
+  flex-direction: row;
+  gap: 30px
+}
+
+#rsvp-form{
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.error {
+  border-style: solid;
+  border-width: 2px;
+
+  /* Set border-color and background */
+  border-color: var(--error-color-border);
+  color: var(--error-color);
+}
+/* Add other rsvp-related selectors here */
+/*** Animations [PLACEHOLDER] [ADDED IN UNIT 8] ***/
+/*** Success Modal [PLACEHOLDER] [ADDED IN UNIT 9] ***/
+/*** Success Modal  ***
+  
+  Purpose:
+  - Add style rules to your website's pop-up modal, which appears
+    when a user successfully submits the RSVP form
+
+  When To Modify:
+  - [ ] Project 9 (REQUIRED FEATURE)
+  - [ ] Any time after
+***/
+
+.modal {
+  display: none;   /* modal should be hidden by default*/
+  position: fixed; /* modal cannot move around the screen */
+  z-index: 2;      /* modal appears above other elements */ 
+  
+  /* TODO: Make the modal fill the entire screen */
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+
+  /* Add a semi-transparent background to shadow non-modal elements*/
+  background-color: rgba(0, 0, 0, 0.4); /* 40% opacity black */
+
+  /* Flexbox settings for modal */
+  /* These won't apply until we update "display:" from "hidden" to "flex" in our JS */
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-container {
+    /* Change modal size and spacing here */
+    padding: 50px;
+    width: 55%;
+
+    /* Customize modal style here */
+    background-color: rgb(13, 13, 13);
+    color: black;
+    text-align: center;
+    font-size: 1rem;
+    font-family: monospace;
+
+    /* Optional: Use flexbox to customize .modal-item layout */
+    display: flex;
+
+}
+
+.modal-item {
+    /* Optional: Style individual elements within the modal */
+}
+
+#modal-img{
+  margin-left: 50px;
+  margin-right:50px;
+  width: 80px;
+}
+
+
+/*** Dark Mode [PLACEHOLDER] [ADDED IN UNIT 5] ***/
+/* Default dark mode style */
+
+#theme-button{
+  margin: 3px;
+  background-color:white;
+  color:var(--accent-color-gray);
+  border: none;     
+  padding: 5px 12px;          
+  border-radius: 15px;         
+  cursor: pointer;
+  font-family:"Bebas Neue", sans-serif; 
+  width: 150px;
+  height: 30px;
+  font-size: medium;
+  letter-spacing: 0.5px;
+}
+
+#theme-button:hover{
+  color: #119546;
+}
+.light-mode {
+  background-color: var(--accent-color-light);
+}
+
+body.light-mode .other-button{
+  background-color: var(--accent-color-dark);  /* dark background for contrast */
+}
+body.light-mode .header-button{
+  background-color: var(--accent-color-dark);  /* dark background for contrast */
+}
+
+
+
+
+/*** Custom Colors (OPTIONAL) ***
+  
+  Purpose:
+  - Use CSS variables to define custom colors for your website
+  - To get you started, we've provided the color scheme used in our example site.
+  - To reference a color variable in your css, use var(--variable-name) in place of a color value
+
+  When To Modify:
+  - [ ] Any time (OPTIONAL)
+***/
+
+:root {
+
+    --bg-color: black;
+    --text-color: #231942;
+
+
+    /* Accent Colors */
+    --accent-color-light: #393636;
+    --accent-color-medium: #684fb5;
+    --accent-color-dark: #0b0a0a;
+    --accent-color-darkest: #231942;
+    --accent-color-green: #28eb76;
+    --accent-color-darkGreen: #25a357;
+    --accent-color-gray: #494949;
+    --accent-color-celeste: #54eaf9;
+
+
+    /* Error Colors */
+    --error-color: #f8bbd0;
+    --error-color-border: #e63946;
+  }
