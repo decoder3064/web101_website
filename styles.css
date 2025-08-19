@@ -51,6 +51,11 @@ body {
 ***/
 
 
+h1 {
+  color: aliceblue;
+  font-family: "Bebas Neue", sans-serif;
+}
+
 h2 {
   color: aliceblue;
 
@@ -75,6 +80,7 @@ p{
 }
 .about-title1{
   font-size: 70px;
+  margin-right: 50px;
   font-family: "Bebas Neue", sans-serif;
   color: transparent; /* hides fill */
   -webkit-text-stroke: .01px white; /* outline width + color */
@@ -119,9 +125,30 @@ p{
   font-weight:lighter;
 }
 
-#next-trainings{
+#next-trainings-container{
+  background-image: url('img/background_proximo_entreno.png');
+  background-size: cover;
+  background-position: center;
+  height: 850px;
+  padding: 100px 20px;
+
+
+  
 
 }
+.next-trainings-title{
+  margin: 0;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+  
+
+
 
 #get-in-touch-form{
 }

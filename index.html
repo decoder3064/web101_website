@@ -40,10 +40,11 @@
         <div class="navbar">
             <div><img id="navbar-img" src="./img/logo_icon.png"></div>
             <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#next-trainings">Next Trainings</a></li>
-                <li><a href="#video">Video!</a></li>
-                <li><a href="#rsvp">Get in Touch</a></li>
+                <li><a href="#about">¿Quienes Somos?</a></li>
+                <li><a href="#next-trainings">Proximo Entrenamiento</a></li>
+                <li><a>Galeria</a></li>
+                <li><a href="#sponsors">Sponsors</a></li>
+                <li><a href="#rsvp">Contacto</a></li>
                 <button id="theme-button">Light Mode</button>
             </ul>
         </div>
@@ -64,7 +65,7 @@
         <header class="header-container">
             <div>
                 <img class="header-logo" src="./img/Website_run your own race.png" />
-                <button  class="header-button"> See next trainings</button>
+                <button  class="header-button"> Ver Próximos Entrenos</button>
             </div>
         </header>
         
@@ -80,14 +81,16 @@
         - [ ] Any time between / after
         --> 
         <main><!--change this -->
-            <div id="about">
+            <section id="about">
                 <div class="about-img-container">
                     <img class="about-img" src="./img/who_are_we.png" /> 
                 </div>
+
                 <div class ="about-title-container">
-                    <h2 class="about-title1">QUIENES</h2>
-                    <h2 class="about-title2">SOMOS?</h2>
+                    <h2 class="about-title1">¿QUIENES SOMOS?</h2>
+                    <h2 class="about-title2"></h2>
                 </div>
+
                 <div class="about-txt-contianer">
                     <p class="about-txt">Welcome to Entren Runners — a community of people passionate about what we love most: running. 
                     We meet in different parts of El Salvador to share routes full of energy, motivation, and camaraderie. 
@@ -95,33 +98,22 @@
                     Whether you're a beginner or an experienced runner, here you'll find a space to grow, enjoy, and never run alone.
                 </p>
             </div>
-            </div>
-            <div class = "carousel">
+            </section>
+
+            <section class = "carousel">
                 <ul class="car-items">
-                    <li> <b>Guided trainings |</b></li>
-                    <li> <b>Motivating Community |</b></li>
-                    <li> <b>Safe and Organized Routes </b> </li>
+                    <li> <b>Entrenamientos Guiados|</b></li>
+                    <li> <b>Comunidad Motivadora |</b></li>
+                    <li> <b>RUTAS SEGURAS Y ORGANIZADAS </b> </li>
                 </ul>
-            </div>
+            </section>
 
-            <!-- schedule
+            <section id="next-trainings-container">
+                <h2 class="next-trainings-title" >PRÓXIMO ENTRENAMIENTO</h2>
+                <p class="training-details">Domingo, 20 de Julio · 8:00 AM · Plaza Presidente</p>
+            </section>
 
-            Purpose:
-            - Section for specific info about the event's schedule
-            - Contains images and descriptions of each activity
-
-            When To Modify:
-            - [x] Project 2 (REQUIRED FEATURE) 
-            - [x] Project 4 (STRETCH FEATURE) 
-            - [x] Any time between / after
-            --> 
-            <div class="video-section" id="video">
-                <h3>Video</h3>
-                <iframe src="https://www.youtube.com/embed/gjAGf7kHTuA"></iframe>
-                <button type="button" class="other-button">See next training</button>
-                <button type="button" class="other-button">Open Location</button>
-            </div>
-            <!-- rsvp [PLACEHOLDER] [ADDED IN UNIT 6] -->
+       
 
             <!-- rsvp
 
@@ -135,7 +127,7 @@
             - [ ] Project 6 (STRETCH FEATURE) 
             - [ ] Any time after
             --> 
-            <div id="rsvp">
+            <section id="rsvp">
                 <h2>Contact us!</h2>
                 <div class="rsvp-container">
                     <div class="rsvp-para">
@@ -165,9 +157,9 @@
                     <!-- Submit button -->
                     <button type="submit" id="rsvp-b" class="other-button">Submit RSVP</button>
                 </div>      
-            </div>
+            </section>
 
-            <!-- success modal
+            <!-- success 
 
             Purpose:
             - Modal that appears when a user successfully signs up for the event
