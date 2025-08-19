@@ -13,18 +13,7 @@ html {
 
 
 
-/*** body ***
-  
-  Purpose:
-  - Add style rules for the body of your webpage
-  - This is useful if you want a rule to apply to EVERYTHING on your page
-    - (Tip: You can always override these rules later in the stylesheet)
-
-  When To Modify:
-  - [ ] Project 3 (REQUIRED FEATURE) 
-  - [ ] Any time after
-***/
-
+/* body */
 body {
     /* Add a background color or image */
     background-color: var(--bg-color); /* see bottom of file for color variables */
@@ -39,18 +28,7 @@ body {
     margin-right: 0px;
 }
 
-/*** Text ***
-  
-  Purpose: 
-  - Add style rules for headings (h1-6),
-    paragraphs (p), links (a), and buttons
-
-  When To Modify:
-  - [X] Project 3 (REQUIRED FEATURE) 
-  - [ ] Any time after
-***/
-
-
+/* Text */
 h1 {
   color: aliceblue;
   font-family: "Bebas Neue", sans-serif;
@@ -69,6 +47,12 @@ p{
   color: aliceblue;
 }
 
+button:hover {
+  color: #28eb76;
+    /* Make the button look different when the user hovers over it */
+}
+
+/* About Section */
 #about{
   display: flex;
   justify-content: space-evenly;
@@ -104,8 +88,8 @@ p{
 
 }
 
-/*pass this to javascript to make it interactive*/
-.carousel{
+/* Carrousel Section */
+.carousel{/*pass this to javascript to make it interactive*/
   background-color: var(--accent-color-celeste);
   display: flex;
   align-items: center;
@@ -125,70 +109,27 @@ p{
   font-weight:lighter;
 }
 
+
+/* Next Trianings Tection */
 #next-trainings-container{
   background-image: url('img/background_proximo_entreno.png');
   background-size: cover;
   background-position: center;
   height: 850px;
   padding: 100px 20px;
-
-
-  
-
 }
+
 .next-trainings-title{
   margin: 0;
   font-family: "Bebas Neue", sans-serif;
-  font-size: 3rem;
+  font-size: 150px;
   text-transform: uppercase;
   margin-bottom: 30px;
   font-weight: 400;
   font-style: normal;
 }
 
-  
-
-
-
-#get-in-touch-form{
-}
-
-input{
-  display: block;
-}
-
-
-button:hover {
-  color: #28eb76;
-    /* Make the button look different when the user hovers over it */
-}
-
-.video-section{
-  margin-bottom: 10px;
-
-}
-
-#next-training{
-  margin-top: 100px;
-  margin-bottom:100px;
-  
-}
-
-.form-container{
-  margin-bottom: 100px;
-}
-
-/*** header ***
-  
-  Purpose:
-  - Add style rules for your website's header section
-
-  When To Modify:
-  - [X] Project 3 (REQUIRED FEATURE) 
-  - [ ] Project 4 (REQUIRED FEATURE) 
-  - [ ] Any time after
-***/
-
+/* header */
 .header-container { /* Example A: This styles elements with class="header" */
   display: flex;
   justify-content: center;
@@ -203,8 +144,6 @@ button:hover {
   text-align: center;
 ;
 }
-
-
 
 .header-logo:nth-of-type(1){
   display: flex;
@@ -249,19 +188,9 @@ button:hover {
 
 
 
-/*** footer ***
-  
-  Purpose:
-  - Add style rules for your website's footer section
-
-  When To Modify:
-  - [ ] Project 3 (STRETCH FEATURE) 
-  - [ ] Any time after
-***/
-
+/* footer */
 .footer { /* Example B: This styles elements with class="footer" */
   background-color: #494949;
-  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -298,18 +227,7 @@ button:hover {
 }
 
 
-/*** Navbar [PLACEHOLDER] [ADDED IN UNIT 4] ***/
-
-/*** Navigation bar (navbar) ***
-  
-  Purpose:
-  - Add style rules for your website's navbar
-
-  When To Modify:
-  - [x] Project 4 (REQUIRED FEATURE) 
-  - [ ] Any time after
-***/
-
+/* Navbar*/
 .navbar{
   display: flex;
   justify-content: space-between;
@@ -347,56 +265,7 @@ button:hover {
   width: 80px;
 }
 
-
-
-/*** About Section ***
-  
-  Purpose:
-  - Add style rules for your website's About section
-
-  When To Modify:
-  - [X] Project 3 (OPTIONAL)
-  - [ ] Project 4 (STRETCH FEATURE) 
-  - [ ] Any time after
-***/
-
-
-/*** Schedule Section ***
-  
-  Purpose:
-  - Add style rules for your website's Schedule section
-
-  When To Modify:
-  - [X] Project 3 (OPTIONAL)
-  - [ ] Project 4 (STRETCH FEATURE) 
-  - [ ] Any time after
-***/
-
-
-/*** Links Section ***
-  
-  Purpose:
-  - Add style rules for your website's Links section
-
-  When To Modify:
-  - [X] Project 3 (OPTIONAL)
-  - [ ] Project 4 (STRETCH FEATURE) 
-  - [ ] Any time after
-***/
-
-
-/*** RSVP [PLACEHOLDER] [ADDED IN UNIT 6] ***/
-/*** RSVP Section ***
-  
-  Purpose:
-  - Add style rules for your website's RSVP form
-
-  When To Modify:
-  - [ ] Project 6 (REQUIRED FEATURE)
-  - [ ] Project 7 (REQUIRED FEATURE)
-  - [ ] Any time after
-***/
-
+/* Form Section*/
 .rsvp-container {
   display: flex;
   flex-direction: row;
@@ -419,7 +288,8 @@ button:hover {
 .form-container{
   display: flex;
   flex-direction: row;
-  gap: 30px
+  gap: 30px;
+  margin-bottom: 100px;
 }
 
 #rsvp-form{
@@ -436,20 +306,9 @@ button:hover {
   border-color: var(--error-color-border);
   color: var(--error-color);
 }
+
 /* Add other rsvp-related selectors here */
 /*** Animations [PLACEHOLDER] [ADDED IN UNIT 8] ***/
-/*** Success Modal [PLACEHOLDER] [ADDED IN UNIT 9] ***/
-/*** Success Modal  ***
-  
-  Purpose:
-  - Add style rules to your website's pop-up modal, which appears
-    when a user successfully submits the RSVP form
-
-  When To Modify:
-  - [ ] Project 9 (REQUIRED FEATURE)
-  - [ ] Any time after
-***/
-
 .modal {
   display: none;   /* modal should be hidden by default*/
   position: fixed; /* modal cannot move around the screen */
@@ -488,9 +347,6 @@ button:hover {
 
 }
 
-.modal-item {
-    /* Optional: Style individual elements within the modal */
-}
 
 #modal-img{
   margin-left: 50px;
