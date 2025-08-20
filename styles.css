@@ -181,6 +181,10 @@ button:hover {
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  
 }
 
 .gallery-text{
@@ -192,11 +196,68 @@ button:hover {
   font-style: normal;
 }
 
+.gallery-car-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  gap:30px;
+}
+
+.gallery-grid-container{
+  flex: 1;
+  max-width: 1500px;
+  overflow: hidden;
+}
+
+.gallery-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Fixed: 4 columns */
+  grid-template-rows: repeat(2, 1fr);    /* Fixed: 2 rows */
+  gap: 50px;
+  padding: 0;
+  list-style: none;
+  margin: 0; /* Fixed: removed max-width: 0 which was breaking the layout */
+}
+
+.gallery-item{
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.gallery-item img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.05);
+}
 
 
+#prev, #next {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    transition:  all 0.3 ease;
+}
 
-
-
+#prev img, #next img {
+    width: 50px; /* Smaller size - change from 50px to 30px */
+    height: 50px; /* Smaller size - change from 50px to 30px */
+    transition: transform 0.3s ease;
+    filter: brightness(0) invert(1); /* Makes the arrow images white */
+}
+#prev:hover, #next:hover {
+    opacity: 1; /* Becomes fully opaque on hover */
+    transform: scale(1.1);
+    
+}
 /* Footer */
 .footer { /* Example B: This styles elements with class="footer" */
   background-color: #494949;
