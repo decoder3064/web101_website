@@ -42,7 +42,7 @@
             <ul>
                 <li><a href="#about">¿Quienes Somos?</a></li>
                 <li><a href="#next-trainings">Proximo Entrenamiento</a></li>
-                <li><a>Galeria</a></li>
+                <li><a href="#gallery-container">Galeria</a></li>
                 <li><a href="#sponsors">Sponsors</a></li>
                 <li><a href="#rsvp">Contacto</a></li>
                 <button id="theme-button">Light Mode</button>
@@ -83,19 +83,14 @@
         <main><!--change this -->
             <section id="about">
                 <div class="about-img-container">
-                    <img class="about-img" src="./img/who_are_we.png" /> 
+                    <img class="about-img" src="img/quienes_somos_logo.png" /> 
                 </div>
-
-                <div class ="about-title-container">
-                    <h2 class="about-title1">¿QUIENES SOMOS?</h2>
-                    <h2 class="about-title2"></h2>
-                </div>
-
                 <div class="about-txt-contianer">
-                    <p class="about-txt">Welcome to Entren Runners — a community of people passionate about what we love most: running. 
-                    We meet in different parts of El Salvador to share routes full of energy, motivation, and camaraderie. 
-                    With the support of our sponsors, we provide hydration, guided training, and unique experiences at every meeting. 
-                    Whether you're a beginner or an experienced runner, here you'll find a space to grow, enjoy, and never run alone.
+                    <p class="about-txt">Bienvenidos a Entre Runners — una comunidad de apasionados por lo que más
+                    amamos: correr. Nos reunimos en distintos puntos de El Salvador para compartir rutas
+                    llenas de energía, motivación y compañerismo. Con el apoyo de nuestros sponsors,
+                    brindamos hidratación, entrenos guiados y experiencias únicas en cada encuentro. Ya
+                    seas principiante o corredor 
                 </p>
             </div>
             </section>
@@ -118,24 +113,44 @@
 
 
 
-            <section class="gallery-container">
+            <section id="gallery-container">
                 <h2 class="gallery-text">GALERÍA</h2>
                 <div class="gallery-car-container">
                     <button id="prev"><img src="/img/prev.png"></button>
 
-                    <div class="gallery-grid-container">
-                        <ul class="gallery-grid">
-                            <li class="gallery-item"><img src="./gallery/white_square.png"></li>
-                            <li class="gallery-item"><img src="./gallery/white_square.png"></li>
-                            <li class="gallery-item"><img src="./gallery/white_square.png"></li>
-                            <li class="gallery-item"><img src="./gallery/white_square.png"></li>
-                            <li class="gallery-item"><img src="./gallery/white_square.png"></li>
-                            <li class="gallery-item"><img src="./gallery/white_square.png"></li>
-                            <li class="gallery-item"><img src="./gallery/white_square.png"></li>
-                            <li class="gallery-item"><img src="./gallery/white_square.png"></li> 
+                    <div id="gallery-viewport">
+
+                        <ul id="gallery-track">
+
+                            <!-- page1 -->
+                            <li id="gallery-page">
+                                <img class="gallery-item" src="./gallery/white_square.png">
+                                <img class="gallery-item" src="./gallery/white_square.png">
+                                <img class="gallery-item" src="./gallery/white_square.png">
+                                <img class="gallery-item" src="./gallery/white_square.png">
+                                <img class="gallery-item" src="./gallery/white_square.png">
+                                <img class="gallery-item" src="./gallery/white_square.png"> 
+                                <img class="gallery-item" src="./gallery/white_square.png"> 
+                                <img class="gallery-item" src="./gallery/white_square.png"> 
+                            </li>
+
+                            <li id="gallery-page">
+                                <img class="gallery-item" src="./gallery/white_square.png">
+                                <img class="gallery-item" src="./gallery/white_square.png">
+                                <img class="gallery-item" src="./gallery/white_square.png">
+                                <img class="gallery-item" src="./gallery/white_square.png">
+                                <img class="gallery-item" src="./gallery/runner.png">
+                                <img class="gallery-item" src="./gallery/white_square.png"> 
+                                <img class="gallery-item" src="./gallery/white_square.png"> 
+                                <img class="gallery-item" src="./gallery/white_square.png"> 
+                            </li>
                         </ul>
                     </div>
                 <button id="next"><img src="img/next.png"></button>
+                </div>
+
+                <div class="pagination-dots" id="paginationDots">
+                <!-- Dots will be created by JavaScript -->
                 </div>
 
             </section>

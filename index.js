@@ -162,6 +162,79 @@ const animateImage = () =>{
     else {rotateFactor = 0;}
 
     modalImage.style.transform = `rotate(${rotateFactor}deg)`;
-    
-
 }
+
+const initializeCarousel = () => {
+    // Get elements
+    const track = document.getElementById('gallery-track');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const dotsContainer = document.getElementById('paginationDots');
+    
+    // Carousel settings
+    let currentPage = 0;
+    const pageWidth = 1250; // Including gap
+    const totalPages = 2;
+    
+    // CREATE DOTS
+    const createDots = () => {
+        dotsContainer.innerHTML = ''; // Clear existing dots
+        for (let i = 0; i < totalPages; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('pagination-dot');
+            if (i === 0) dot.classList.add('active'); // First dot active
+            
+            // Click event for each dot
+            dot.addEventListener('click', () => {
+                moveToPage(i);
+            });
+            
+            dotsContainer.appendChild(dot);
+        }
+    };
+    
+    // UPDATE DOTS
+    const updateDots = () => {
+        const dots = document.querySelectorAll('.pagination-dot');
+        dots.forEach((dot, index) => {
+            if (index === currentPage) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    };
+    
+    // Function to move carousel (UPDATED)
+    const moveToPage = (pageNumber) => {
+        const moveDistance = pageNumber * pageWidth;
+        track.style.transform = `translateX(-${moveDistance}px)`;
+        currentPage = pageNumber;
+        
+        // Update buttons and dots
+        prevBtn.disabled = currentPage === 0;
+        nextBtn.disabled = currentPage === totalPages - 1;
+        updateDots(); // Add this line
+    };
+    
+    // Your existing event listeners...
+    nextBtn.addEventListener('click', () => {
+        if (currentPage < totalPages - 1) {
+            currentPage++;
+            moveToPage(currentPage);
+        }
+    });
+    
+    prevBtn.addEventListener('click', () => {
+        if (currentPage > 0) {
+            currentPage--;
+            moveToPage(currentPage);
+        }
+    });
+    
+    // Initialize
+    createDots();
+    moveToPage(0);
+};
+
+document.addEventListener('DOMContentLoaded', initializeCarousel);

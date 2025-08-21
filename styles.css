@@ -51,7 +51,9 @@ button:hover {
 }
 .about-img{
   display: flex;
-  width: 300px;
+  width: 750px;
+  margin: 35px;
+  
 }
 .about-title1{
   font-size: 70px;
@@ -72,10 +74,12 @@ button:hover {
   display: flex;
   width: 400px;
   justify-content: center;
+ 
 }
 .about-txt{
   display: flex;
   align-items: center;
+  margin: 50px;
 
 }
 
@@ -177,14 +181,10 @@ button:hover {
 
 }
 /* Gallery Section */
-.gallery-container{
+#gallery-container{
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 50px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  
 }
 
 .gallery-text{
@@ -199,32 +199,47 @@ button:hover {
 .gallery-car-container{
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  width: 100%;
-  gap:30px;
-}
-
-.gallery-grid-container{
-  flex: 1;
-  max-width: 1500px;
   overflow: hidden;
+  flex-direction: row;
+  
+
 }
 
-.gallery-grid{
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Fixed: 4 columns */
-  grid-template-rows: repeat(2, 1fr);    /* Fixed: 2 rows */
+#gallery-viewport{
+  overflow: hidden;
+  width: 1200px;
+  /* border: 2px solid red;   */
+
+  
+}
+
+
+
+#gallery-track{
+  display: flex;
+  margin: 0;          /* Remove default ul margin */
+  padding: 0;         /* Remove default ul padding */
+  list-style: none;   /* Remove bullet points */ 
   gap: 50px;
-  padding: 0;
-  list-style: none;
-  margin: 0; /* Fixed: removed max-width: 0 which was breaking the layout */
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+
+}
+
+#gallery-page{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);  /* 4 columns */
+  grid-template-rows: repeat(2, 1fr);     /* 2 rows */
+  width: 1200px;  /* Same as viewport width */
+  height: 590px;  
+  flex-shrink: 0;    /* Prevents shrinking */
+  gap: 20px;
+  margin: 0;          /* Remove default li margin */
+  padding: 0; 
+  /* border: 2px solid orange; */
 }
 
 .gallery-item{
-  aspect-ratio: 1;
-  overflow: hidden;
-  border-radius: 8px;
+   height: 285px;
 }
 
 .gallery-item img{
@@ -234,8 +249,9 @@ button:hover {
   transition: transform 0.3s ease;
 }
 
-.gallery-item img:hover {
+.gallery-item:hover {
   transform: scale(1.05);
+  transition: transform 0.3s ease;
 }
 
 
@@ -244,9 +260,12 @@ button:hover {
     border: none;
     cursor: pointer;
     padding: 8px;
-    transition:  all 0.3 ease;
-    
-    
+    transition:  all 0.3 ease; 
+}
+
+#prev:disabled, #next:disabled {
+    background: rgba(84, 234, 249, 0.3);
+    cursor: not-allowed;
 }
 
 #prev img, #next img {
@@ -259,6 +278,30 @@ button:hover {
     opacity: 1; /* Becomes fully opaque on hover */
     transform: scale(1.1);
     filter: brightness(0) invert(43%) sepia(96%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);
+}
+
+.pagination-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pagination-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-dot.active {
+    background-color: #54eaf9;  /* Your accent color */
+}
+
+.pagination-dot:hover {
+    background-color: rgba(255, 255, 255, 0.6);
 }
 /* Sponsors */
 #sponsors-container{
