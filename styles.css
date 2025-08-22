@@ -84,14 +84,13 @@ button:hover {
 }
 
 /* Carrousel Section */
-.carousel{/*pass this to javascript to make it interactive*/
+#carousel-container{/*pass this to javascript to make it interactive*/
   background-color: var(--accent-color-celeste);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.car-items{
+#car-items{
   display: flex;
   justify-content: space-between;
   gap: 50px;

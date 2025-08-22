@@ -164,77 +164,97 @@ const animateImage = () =>{
     modalImage.style.transform = `rotate(${rotateFactor}deg)`;
 }
 
-const initializeCarousel = () => {
-    // Get elements
+
+const initCarousel =() =>{
+    const carItems = document.getElementById('car-items');
+    const scroll = window.scrollY;
+    const rect = carItems.getBoundingClientRect();
+
+    const carouselOffsetTop = carItems.offsetTop; // Fixed position from top of document
+    const moveDistance = Math.abs(scroll - carouselOffsetTop)/2;
+
+
+    console.log("rect.top:", rect.top, "window.innerHeight:", window.innerHeight);
+
+    if (rect.top < window.innerHeight) {
+        carItems.style.transform = `translateX(-${moveDistance}px)`;
+        console.log("Moving by:", moveDistance);
+    }
+}
+
+
+window.addEventListener('scroll',initCarousel)
+
+
+const initGalCarousel = () => {
     const track = document.getElementById('gallery-track');
     const prevBtn = document.getElementById('prev');
     const nextBtn = document.getElementById('next');
     const dotsContainer = document.getElementById('paginationDots');
-    
-    // Carousel settings
+
+    if (!track || !prevBtn || !nextBtn || !dotsContainer) {
+    console.error('Required DOM elements not found');
+    return;
+    }
+
     let currentPage = 0;
-    const pageWidth = 1250; // Including gap
-    const totalPages = 2;
-    
-    // CREATE DOTS
-    const createDots = () => {
-        dotsContainer.innerHTML = ''; // Clear existing dots
-        for (let i = 0; i < totalPages; i++) {
+    const pageWidth = 1250;
+    const totalPages = 4;
+
+    const createDots = () =>{
+        dotsContainer.innerHTML = '';
+        for(let i=0; i<totalPages;i++){
             const dot = document.createElement('div');
             dot.classList.add('pagination-dot');
-            if (i === 0) dot.classList.add('active'); // First dot active
+            if(i === 0){dot.classList.add('active');}
             
-            // Click event for each dot
-            dot.addEventListener('click', () => {
+            dot.addEventListener('click',() => {
                 moveToPage(i);
             });
-            
+
             dotsContainer.appendChild(dot);
         }
     };
-    
-    // UPDATE DOTS
-    const updateDots = () => {
+
+
+    const updateDots = () =>{
         const dots = document.querySelectorAll('.pagination-dot');
-        dots.forEach((dot, index) => {
-            if (index === currentPage) {
+        dots.forEach((dot,index)=>{
+            if(index === currentPage){
                 dot.classList.add('active');
-            } else {
+            } else{
                 dot.classList.remove('active');
             }
         });
     };
-    
-    // Function to move carousel (UPDATED)
-    const moveToPage = (pageNumber) => {
+
+    const moveToPage =(pageNumber)=>{
         const moveDistance = pageNumber * pageWidth;
         track.style.transform = `translateX(-${moveDistance}px)`;
         currentPage = pageNumber;
-        
-        // Update buttons and dots
+
         prevBtn.disabled = currentPage === 0;
-        nextBtn.disabled = currentPage === totalPages - 1;
-        updateDots(); // Add this line
+        nextBtn.disabled = currentPage === totalPages -1;
+        updateDots();
     };
-    
-    // Your existing event listeners...
-    nextBtn.addEventListener('click', () => {
-        if (currentPage < totalPages - 1) {
+
+    nextBtn.addEventListener('click', () =>{
+        if(currentPage < totalPages - 1){
             currentPage++;
             moveToPage(currentPage);
         }
     });
-    
-    prevBtn.addEventListener('click', () => {
-        if (currentPage > 0) {
+
+    prevBtn.addEventListener('click', () =>{
+        if(currentPage > 0){
             currentPage--;
             moveToPage(currentPage);
         }
     });
-    
-    // Initialize
+
     createDots();
     moveToPage(0);
-};
 
-document.addEventListener('DOMContentLoaded', initializeCarousel);
+}
+    
+document.addEventListener('DOMContentLoaded', initGalCarousel);
