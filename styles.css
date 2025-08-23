@@ -40,6 +40,9 @@ p{
 
 button:hover {
   color: var(--accent-color-green);
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+
     /* Make the button look different when the user hovers over it */
 }
 
@@ -48,26 +51,14 @@ button:hover {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 .about-img{
   display: flex;
   width: 750px;
   margin: 35px;
   
-}
-.about-title1{
-  font-size: 70px;
-  margin-right: 50px;
-  font-family: "Bebas Neue", sans-serif;
-  color: transparent; /* hides fill */
-  -webkit-text-stroke: .01px white; /* outline width + color */
-  text-transform: uppercase;
-}
-.about-title2{
-  font-size: 100px;
-  font-family: "Bebas Neue", sans-serif;
-  font-weight: none;
-  margin-right: 30px;
 }
 
 .about-txt-cotainer{
@@ -90,6 +81,7 @@ button:hover {
   align-items: center;
   justify-content: center;
 }
+
 #car-items{
   display: flex;
   justify-content: space-between;
@@ -176,8 +168,7 @@ button:hover {
   width: 150px;
   height: 30px;
   font-size: medium;
-  letter-spacing: 0.5px
-
+  letter-spacing: 0.5px;
 }
 /* Gallery Section */
 #gallery-container{
@@ -263,7 +254,6 @@ button:hover {
 }
 
 #prev:disabled, #next:disabled {
-    background: rgba(84, 234, 249, 0.3);
     cursor: not-allowed;
 }
 
@@ -276,6 +266,7 @@ button:hover {
 #prev:hover, #next:hover {
     opacity: 1; /* Becomes fully opaque on hover */
     transform: scale(1.1);
+    transition: transform 0.3s ease;
     filter: brightness(0) invert(43%) sepia(96%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);
 }
 
@@ -410,6 +401,7 @@ button:hover {
 }
 .social-media:hover {
   filter: brightness(0.8) invert(1);
+  
 }
 #footer-img{
   width: 100px;
@@ -459,37 +451,138 @@ button:hover {
 }
 
 /* Form Section*/
-.rsvp-container {
+#rsvp {
+  background-color: black;
+  padding: 60px 0;
   display: flex;
-  flex-direction: row;
-  gap: 20px; 
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.contact-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  max-width: 1600px; 
   width: 100%;
-  padding-bottom: -1;
+  padding: 0 60px; 
+  gap: 120px; 
+}
+/* Left side - Form */
+.form-section {
+  flex: 1;
+  max-width: 600px;
+  margin-bottom: 75px;
+  margin-left: 100px;
 }
 
-.rsvp-para{
+.contact-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 120px;
   color: white;
-  width: 55%;
-  padding-right: 10px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
 }
 
-.rsvp-participants{
-  width: 45%;
-  padding-right: 10px;
-}
-
-.form-container{
+.contact-form {
   display: flex;
-  flex-direction: row;
-  gap: 30px;
-  margin-bottom: 100px;
+  flex-direction: column;
+  gap: 20px;
 }
 
-#rsvp-form{
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
+.form-input {
+  background-color: white;
+  border: none;
+  padding: 18px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+  outline: none;
+  transition: all 0.3s ease;
 }
+
+.form-input::placeholder {
+  color: #999;
+  text-transform: capitalize;
+}
+
+.form-input:focus {
+  box-shadow: 0 0 0 3px rgba(84, 234, 249, 0.3);
+}
+
+.form-input.error {
+  border: 2px solid #e63946;
+  background-color: #f8bbd0;
+  color: #721c24;
+}
+.message-textarea {
+  background-color: white;
+  border: none;
+  padding: 18px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+  outline: none;
+  resize: vertical;
+  min-height: 120px;
+  transition: all 0.3s ease;
+}
+
+.message-textarea::placeholder {
+  color: #999;
+}
+
+.message-textarea:focus {
+  box-shadow: 0 0 0 3px rgba(84, 234, 249, 0.3);
+}
+
+.submit-btn {
+  background-color: #494949;
+  color: #54eaf9;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #54eaf9;
+  color: #494949;
+  transform: translateY(-2px);
+}
+
+/* Right side - Image */
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.runner-image {
+  width: 700px;
+  height: 700px;
+
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+}
+
+  
+
+    
+
 
 .error {
   border-style: solid;

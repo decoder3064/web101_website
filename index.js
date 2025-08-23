@@ -78,7 +78,7 @@ const validateForm = (event) => {
    let person = {
     name: rsvpInputs[0],
     email: rsvpInputs[1],
-    country: rsvpInputs[2]
+    message: rsvpInputs[2]
    };
 
 
@@ -110,7 +110,6 @@ const validateForm = (event) => {
 
     // TODO: If no errors, call addParticipant() and clear fields
   if(!containsErrors){
-        addParticipant(person);
         toggleModal(person);
         for(const entry in person){
             person[entry].value = "";
@@ -143,7 +142,8 @@ const toggleModal = (person) => {
     // TODO: Update modal display to flex
     modal.style.display = "flex";
     // TODO: Update modal text to personalized message
-    modalContent.textContent = `🎉 Thank you, ${person.name.value} from ${person.country.value}, for joining our run! You’ll receive updates at ${person.email.value}.`;
+     modalContent.textContent = `🎉 ¡Gracias, ${person.name.value}! Hemos recibido tu mensaje y te contactaremos pronto a ${person.email.value}.`;
+
 
 
     // Set modal timeout to 5 seconds

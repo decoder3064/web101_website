@@ -43,7 +43,7 @@
                 <li><a href="#about">¿Quienes Somos?</a></li>
                 <li><a href="#next-trainings">Proximo Entrenamiento</a></li>
                 <li><a href="#gallery-container">Galeria</a></li>
-                <li><a href="#sponsors">Sponsors</a></li>
+                <li><a href="#sponsors-container">Sponsors</a></li>
                 <li><a href="#rsvp">Contacto</a></li>
                 <button id="theme-button">Light Mode</button>
             </ul>
@@ -196,38 +196,44 @@
             - [ ] Project 6 (REQUIRED FEATURE) 
             - [ ] Project 6 (STRETCH FEATURE) 
             - [ ] Any time after
-            --> 
-            <section id="rsvp">
-                <h2>Contact us!</h2>
-                <div class="rsvp-container">
-                    <div class="rsvp-para">
-                        <!-- info goes here -->
-                         <p>Interested in joining EntreRunners? RSVP now to let us know you're coming! 
-                            This is a free event—no attendance taken, just come ready to connect, share ideas, and get inspired. 
-                            Fill out the form below to save your spot and stay in the loop!</p>
+            -->
+     <section>   
+        <div class="contact-container">
+            <!-- Left side - Form -->
+            <div class="form-section">
+                <h1 class="contact-title">Contáctanos</h1>
+                <form class="contact-form" id="rsvp-form">
+                    <input type="text" id="name" class="form-input" placeholder="Nombre" />
+                    <input type="email" id="email" class="form-input" placeholder="Correo" />
+                    <textarea id="message" class="message-textarea" placeholder="Escribe tu mensaje aquí"></textarea>
+                    <button type="button" id="rsvp-b" class="submit-btn">Enviar</button>
+                </form>
+            </div>
 
-                    </div>
-                    <div class="rsvp-participants">
-                        <p>👟 David from Seattle will run on the next training!</p>
-                        <p>👟 Karla from Naerobi will run on the next training!</p>
-                        <p>👟 Teresa from Berlin will run on the next training!</p>
-                    </div>
+            <!-- Right side - Image -->
+            <div class="image-section">
+                <div class="decoration-lines-left">
+                    <div class="line-left"></div>
+                    <div class="line-left"></div>
+                    <div class="line-left"></div>
+                    <div class="line-left"></div>
                 </div>
+                
+                <img src="/img/contact_us.png" class="runner-image" />
+                
+                <div class="decoration-lines">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+    </section> 
+            
 
-                <!--- Sign RSVP Form ---> 
-                <div class="form-container">
-                    <form id="rsvp-form" title="rsvp-form">
-                        <!-- form inputs go here -->
-                         <input type="text" id="name" placeholder="name"/>
-                         <input type="email" id="email" placeholder="email"/>
-                         <!-- <input type="text" id="message" placeholder="message"></input> -->
-                         <input type="text" id="country" placeholder="country"/>
-                        
-                    </form>
-                    <!-- Submit button -->
-                    <button type="submit" id="rsvp-b" class="other-button">Submit RSVP</button>
-                </div>      
-            </section>
+               
+       
 
             <!-- success 
 
