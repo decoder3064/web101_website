@@ -141,7 +141,7 @@ button:hover {
   max-width: 700px;
 }
 
-.header-button{
+#header-button{
   /* Example Style, replace with your own! */
   background-color: var(--accent-color-gray);
   color:var(--accent-color-celeste);
@@ -156,6 +156,9 @@ button:hover {
   font-size: large;
 }
 
+#header-button:hover{
+  color: var(--accent-color-green);
+}
 .other-button{
   margin: 3px;
   background-color: var(--accent-color-gray);
@@ -669,7 +672,7 @@ button:hover {
 body.light-mode .other-button{
   background-color: var(--accent-color-dark);  /* dark background for contrast */
 }
-body.light-mode .header-button{
+body.light-mode #header-button{
   background-color: var(--accent-color-dark);  /* dark background for contrast */
 }
 
