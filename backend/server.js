@@ -38,9 +38,14 @@ app.get('/api/gallery-images', async (req, res) =>{
         q: `'${folderId}' in parents and mimeType contains 'image/'`,
         fields: 'files(id, name, mimeType)' 
     });
+
+    const transImages = toURL(response.data.files);
+
+    console.log(transImages);
+
     res.json({
         message: "Connected to Google Grive!",
-        images: response.data.files
+        images: transImages
     });
     }
 
@@ -50,3 +55,10 @@ app.get('/api/gallery-images', async (req, res) =>{
 
    }
 });
+
+function toURL(files){
+    return files.map(file =>{
+        return {url:`https://lh3.googleusercontent.com/d/${file.id}`,
+                name: file.name};
+    });
+};

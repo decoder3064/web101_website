@@ -147,7 +147,58 @@ const initCarousel =() =>{
 window.addEventListener('scroll',initCarousel)
 
 
-const initGalCarousel = () => {
+
+
+
+// Test API Connection
+apiTestButton = document.getElementById('header-button');
+
+apiTestButton.addEventListener('click',() => {
+    fetch(`http://localhost:3000/api/test`).then(response =>{
+        if(response.ok){
+            return response.json();
+        }
+        else{return `Naur bro this aint working`};
+    }).then(data => console.log(data));
+});
+
+
+//Load images to gallery
+const loadGallery = () =>{
+    fetch(`http://localhost:3000/api/gallery-images`).then(response =>{
+        if(response.ok){
+            return response.json()
+        }
+        else{return `Images are not working`}
+    }).then(data =>{
+        updateGalleryHTML(data.images); 
+        initGalCarousel(data.images)
+        }
+    )};
+
+
+const updateGalleryHTML = (images) =>{
+    let counter = 0; 
+    const track = document.getElementById('gallery-track');
+    track.innerHTML = '';
+    newLi = null;
+
+    for(let i = 0; i < images.length; i++){
+        if(i % 8 === 0){
+            newLi = document.createElement('li');
+            newLi.id = 'gallery-page';
+            track.appendChild(newLi);
+        }
+        let img = document.createElement('img');
+        img.src = images[i].url;
+        img.classList.add('gallery-item');
+        newLi.appendChild(img);
+    }
+
+};
+
+
+const initGalCarousel = (images) => {
     const track = document.getElementById('gallery-track');
     const prevBtn = document.getElementById('prev');
     const nextBtn = document.getElementById('next');
@@ -160,7 +211,7 @@ const initGalCarousel = () => {
 
     let currentPage = 0;
     const pageWidth = 1250;
-    const totalPages = 4;
+    const totalPages = Math.ceil(images.length / 8);
 
     const createDots = () =>{
         dotsContainer.innerHTML = '';
@@ -218,17 +269,11 @@ const initGalCarousel = () => {
 
 }
     
-document.addEventListener('DOMContentLoaded', initGalCarousel);
+document.addEventListener('DOMContentLoaded', loadGallery);
 
 
-// Test API Connection
-apiTestButton = document.getElementById('header-button');
 
-apiTestButton.addEventListener('click',() => {
-    fetch(`http://localhost:3000/api/test`).then(response =>{
-        if(response.ok){
-            return response.json();
-        }
-        else{return `Naur bro this aint working`};
-    }).then(data => console.log(data));
-});
+
+
+
+
