@@ -9,5 +9,6 @@
     "**/.vscode": true,
     "**/.vscodeedu": true,
     "**/*.code-workspace": true
-  }
+  },
+  "git.ignoreLimitWarning": true
 }

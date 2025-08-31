@@ -1,10 +1,16 @@
-const express = require('express');//import express
+require('dotenv').config();
+const express = require('express');
 const {google} = require('googleapis');
-const path = require('path') 
+const { auth } = require('googleapis/build/src/apis/abusiveexperiencereport');
+const nodemailer = require("nodemailer");
+
+const path = require('path');
+
 
 const app = express()//creates app
 const port = 3000
 
+app.use(express.json());
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -54,6 +60,49 @@ app.get('/api/gallery-images', async (req, res) =>{
     res.status(500).json({error: 'Failed to fetch images'});
 
    }
+});
+
+
+app.post('/api/contact', async (req, res) =>{
+    try{
+         const {name, email, message} = req.body;
+         console.log(process.env.EMAIL_USER);
+
+         const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth : {
+                user : process.env.EMAIL_USER,
+                pass : process.env.EMAIL_PASS
+            }
+        });
+
+        (async () => {
+            try{
+            const info = await transporter.sendMail({
+                from:'"Entre Runners" <entrerunners.dev@gmail.com>',
+                to: email,
+                subject:"Test Response",
+                text:"This is a test!",
+                html: "<p>This is a test!</p>"
+                });
+                console.log("Message sent: %s", info.messageId);
+                console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+            }
+            catch{
+                console.error("Error while sending mail", err);
+            }
+        })();
+
+        console.log('Received data:', { name, email, message });
+
+    }
+    catch (error){
+        console.error('Email error: ', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Failed to send email' 
+        });
+    };
 });
 
 function toURL(files){

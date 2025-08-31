@@ -301,7 +301,7 @@ button:hover {
   display:flex;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .sponsors-background{
@@ -456,11 +456,11 @@ button:hover {
 /* Form Section*/
 #rsvp {
   background-color: black;
-  padding: 60px 0;
+  padding: 60px 0;  
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: auto;
 }
 
 .contact-container {

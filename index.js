@@ -68,15 +68,28 @@ const validateForm = (event) => {
      email.classList.remove('error');
   }
 
-
-    // TODO: If no errors, call addParticipant() and clear fields
   if(!containsErrors){
-        toggleModal(person);
-        for(const entry in person){
-            person[entry].value = "";
+    fetch(`http://localhost:3000/api/contact`, {
+        method: "POST", 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            name: person.name.value,
+            email: person.email.value, 
+            message: person.message.value
+        })
+    })
+    .then(response => {
+        if(response.ok){
+            toggleModal(person);
+            for(const entry in person){
+                person[entry].value = "";
+            }
         }
+        else{
+            console.error('Email failed');
+        }
+    });
     }
-
 }
 
 // Step 3: Replace the form button's event listener with a new one that calls validateForm()
