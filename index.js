@@ -148,11 +148,9 @@ const initCarousel =() =>{
     const moveDistance = Math.abs(scroll - carouselOffsetTop)/2;
 
 
-    console.log("rect.top:", rect.top, "window.innerHeight:", window.innerHeight);
 
     if (rect.top < window.innerHeight) {
         carItems.style.transform = `translateX(-${moveDistance}px)`;
-        console.log("Moving by:", moveDistance);
     }
 }
 

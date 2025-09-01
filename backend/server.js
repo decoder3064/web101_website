@@ -76,24 +76,26 @@ app.post('/api/contact', async (req, res) =>{
             }
         });
 
-        (async () => {
-            try{
-            const info = await transporter.sendMail({
+            const emailSent = await transporter.sendMail({
+                from:'"Entre Runners Website" <entrerunners.dev@gmail.com>',
+                to: process.env.EMAIL_TO,
+                subject: `New Contact Form: ${name}`,
+                text: `You received a new message:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
+                replyTo: email 
+            });
+
+            const confirmation = await transporter.sendMail({
                 from:'"Entre Runners" <entrerunners.dev@gmail.com>',
                 to: email,
                 subject:"Test Response",
                 text:"This is a test!",
                 html: "<p>This is a test!</p>"
                 });
-                console.log("Message sent: %s", info.messageId);
-                console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-            }
-            catch{
-                console.error("Error while sending mail", err);
-            }
-        })();
 
+        console.log("Message sent: %s", emailSent.messageId);
         console.log('Received data:', { name, email, message });
+        res.json({ success: true, message: "Emails sent successfully" });
+
 
     }
     catch (error){
