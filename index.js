@@ -19,15 +19,6 @@
 const button = document.getElementById('rsvp-b');
 
 
-const addParticipant = (person) => {
-    // Step 2: Write your code to manipulate the DOM here
-    const newParagraph = document.createElement('p');
-    newParagraph.textContent = `👟 ${person.name.value} from ${person.country.value} will run on the next training!`;
-    const participants = document.querySelector('.rsvp-participants');
-    participants.appendChild(newParagraph);
-    
-}
-
 
 // Step 2: Write the callback function
 const validateForm = (event) => {
@@ -41,54 +32,73 @@ const validateForm = (event) => {
     email: rsvpInputs[1],
     message: rsvpInputs[2]
    };
-
-
-
-  // TODO: Loop through all inputs
-  for(const key in person){
-    // TODO: Inside loop, validate the value of each input
-    const input = person[key];
-    if (input.value.trim().length < 2){
-        containsErrors = true;
-        input.classList.add('error');
-    }
-    else{
-        input.classList.remove('error');
-    }  
-  }
-
-
-  email = person["email"]
-
-  if(!email.value.includes(".com") || !email.value.includes("@")){
-    containsErrors = true;
-    email.classList.add('error');
-  }
-  else{
-     email.classList.remove('error');
-  }
-
-  if(!containsErrors){
-    fetch(`http://localhost:3000/api/contact`, {
-        method: "POST", 
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            name: person.name.value,
-            email: person.email.value, 
-            message: person.message.value
-        })
-    })
-    .then(response => {
-        if(response.ok){
-            toggleModal(person);
-            for(const entry in person){
-                person[entry].value = "";
-            }
+   // Loop through all inputs
+    for(const key in person){
+        const input = person[key];
+        if (input.value.trim().length < 2){
+            containsErrors = true;
+            input.classList.add('error');
         }
         else{
-            console.error('Email failed');
-        }
-    });
+            input.classList.remove('error');
+        }  
+    }
+
+    // Comprehensive email validation
+    const email = person["email"];
+    const emailValue = email.value.trim();
+
+    // Check if email has @ symbol
+    if (!emailValue.includes("@")) {
+        containsErrors = true;
+        email.classList.add('error');
+    }
+    // Check if email has a domain (dot followed by letters)
+    else if (!emailValue.match(/\.[a-zA-Z]{2,}$/)) {
+        containsErrors = true;
+        email.classList.add('error');
+    }
+
+    else if (emailValue.indexOf("@") === 0 || emailValue.indexOf("@") === emailValue.length - 1) {
+        containsErrors = true;
+        email.classList.add('error');
+    }
+    // Check for multiple @ symbols
+    else if ((emailValue.match(/@/g) || []).length !== 1) {
+        containsErrors = true;
+        email.classList.add('error');
+    }
+    else {
+        email.classList.remove('error');
+    }
+
+    if(!containsErrors){
+        fetch(`http://localhost:3000/api/contact`, {
+            method: "POST", 
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                name: person.name.value,
+                email: person.email.value, 
+                message: person.message.value
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success){
+                toggleModal(person);
+                for(const entry in person){
+                    person[entry].value = "";
+                }
+            }
+            else{
+                console.error('Server error:', data.message);
+                alert('Failed to send email: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Network error:', error);
+            alert('Network error. Please try again.');
+        });
     }
 }
 
@@ -151,6 +161,7 @@ const initCarousel =() =>{
 
     if (rect.top < window.innerHeight) {
         carItems.style.transform = `translateX(-${moveDistance}px)`;
+        console.log("Moving by:", moveDistance);
     }
 }
 

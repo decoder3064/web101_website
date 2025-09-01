@@ -79,24 +79,29 @@ app.post('/api/contact', async (req, res) =>{
             const emailSent = await transporter.sendMail({
                 from:'"Entre Runners Website" <entrerunners.dev@gmail.com>',
                 to: process.env.EMAIL_TO,
-                subject: `New Contact Form: ${name}`,
-                text: `You received a new message:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
+                subject: `Nueva Forma de Contacto: ${name}`,
+                text: `Has Recibido un Nuevo Mensaje:\n\nNombre: ${name}\nEmail: ${email}\nMensaje: ${message}`,
                 replyTo: email 
             });
 
             const confirmation = await transporter.sendMail({
-                from:'"Entre Runners" <entrerunners.dev@gmail.com>',
+                from: '"Entre Runners" <entrerunners.dev@gmail.com>',
                 to: email,
-                subject:"Test Response",
-                text:"This is a test!",
-                html: "<p>This is a test!</p>"
-                });
-
-        console.log("Message sent: %s", emailSent.messageId);
-        console.log('Received data:', { name, email, message });
-        res.json({ success: true, message: "Emails sent successfully" });
-
-
+                subject: "¡Gracias por contactarnos!",
+                text: "Hemos recibido tu mensaje. Nuestro equipo revisará tu solicitud y nos pondremos en contacto contigo muy pronto. ¡Gracias por confiar en Entre Runners!",
+                html: `
+                    <div style="font-family: Arial, sans-serif; color: #333;">
+                        <h2 style="color: #0066cc;">¡Gracias por contactarnos!</h2>
+                        <p>Hemos recibido tu mensaje y nuestro equipo ya está trabajando para darte la mejor respuesta posible.</p>
+                        <p><strong>Pronto nos pondremos en contacto contigo</strong> para brindarte más información.</p>
+                        <br>
+                        <p style="font-size: 14px; color: #555;">Atentamente,<br>El equipo de <strong>Entre Runners</strong></p>
+                    </div>
+                `
+            });
+            console.log("Mensaje enviado a: %s", email);
+            console.log('Datos recibidos:', { name, email, message });
+            res.json({ success: true, message: "Correo enviado exitosamente" });
     }
     catch (error){
         console.error('Email error: ', error);
