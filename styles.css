@@ -115,6 +115,201 @@ button:hover {
   font-style: normal;
 }
 
+
+/* Count Down */
+#training-countdown {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('img/runners-background.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 60px 20px;
+    color: white;
+}
+
+.countdown-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+    gap: 60px;
+}
+
+.countdown-left {
+    flex: 2;
+}
+
+.countdown-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    line-height: 0.9;
+}
+
+.countdown-display {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.time-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    font-weight: 400;
+    color: #54eaf9;
+    line-height: 0.8;
+}
+
+.time-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+.time-separator {
+    font-size: 60px;
+    color: #54eaf9;
+    margin: 0 20px;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.calendar-btn {
+    background-color: #494949;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.calendar-btn:hover {
+    background-color: #54eaf9;
+    color: #000;
+}
+
+.map-container {
+    position: relative;
+}
+
+#training-map {
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    width: 300px;
+    height: 200px;
+    z-index: 8;
+}
+
+#training-map iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.map-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.waze-btn {
+    background-color: #54eaf9;
+    color: #000;
+}
+
+.maps-btn {
+    background-color: #494949;
+    color: white;
+}
+
+.countdown-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.date-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.day-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 120px;
+    font-weight: 400;
+    line-height: 0.8;
+    color: white;
+}
+
+.month-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    font-weight: 400;
+    color: white;
+    margin-top: -10px;
+}
+
+.time-location {
+    text-align: right;
+}
+
+.time-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    font-weight: 400;
+    color: white;
+    display: block;
+}
+
+.location-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    font-weight: 400;
+    color: white;
+    line-height: 0.9;
+}
+
+@media (max-width: 768px) {
+    .countdown-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .countdown-right {
+        align-items: center;
+        text-align: center;
+    }
+}
+
+
 /* header */
 .header-container { /* Example A: This styles elements with class="header" */
   display: flex;
@@ -642,6 +837,8 @@ button:hover {
   margin-right:50px;
   width: 80px;
 }
+
+
 
 
 /*** Dark Mode [PLACEHOLDER] [ADDED IN UNIT 5] ***/

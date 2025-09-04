@@ -293,8 +293,164 @@ const initGalCarousel = (images) => {
     
 document.addEventListener('DOMContentLoaded', loadGallery);
 
+//Count Down 
+// Training schedule data
+const trainingSchedule = {
+    tuesday: { 
+        time: "19:30", 
+        location: "Millennium Plaza",
+        address: "Millennium Plaza, San Salvador",
+        lat: 13.7083,
+        lng: -89.2073
+    },
+    wednesday: { 
+        time: "19:30", 
+        location: "Las Cascadas",
+        address: "Las Cascadas, Antiguo Cuscatlán", 
+        lat: 13.6687,
+        lng: -89.2578
+    },
+    thursday: { 
+        time: "19:30", 
+        location: "Plaza Presidente",
+        address: "Plaza Presidente, San Salvador",
+        lat: 13.7025,
+        lng: -89.2137
+    },
+    saturday: { 
+        time: "06:00", 
+        location: "Multiplaza",
+        address: "Multiplaza, Escalón",
+        lat: 13.7067,
+        lng: -89.2323
+    }
+};
 
+const getNextTraining = () => {
+    const now = new Date();
+    const dayOfWeek = now.getDay();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    
+    const trainingDays = [2, 3, 4, 6]; // Tue, Wed, Thu, Sat
+    
+    for (let i = 0; i < trainingDays.length; i++) {
+        const trainingDay = trainingDays[i];
+        
+        if (dayOfWeek < trainingDay) {
+            return trainingDay;
+        } 
+        else if (dayOfWeek === trainingDay) {
+            const trainingHour = trainingDay === 6 ? 6 : 19;
+            const trainingMinute = trainingDay === 6 ? 0 : 30;
+            
+            if (currentHour < trainingHour || (currentHour === trainingHour && currentMinute < trainingMinute)) {
+                return trainingDay;
+            }
+        }
+    }
+    
+    return 2; // Next Tuesday
+};
 
+const calculateTimeRemaining = (nextDay) => {
+    const now = new Date();
+    const nextTraining = new Date();
+    
+    // Set to next occurrence of the training day
+    const daysUntilTraining = (nextDay - now.getDay() + 7) % 7;
+    nextTraining.setDate(now.getDate() + (daysUntilTraining === 0 ? 7 : daysUntilTraining));
+    
+    // Set training time
+    if (nextDay === 6) {
+        nextTraining.setHours(6, 0, 0, 0); // Saturday 6:00 AM
+    } else {
+        nextTraining.setHours(19, 30, 0, 0); // Other days 7:30 PM
+    }
+    
+    // If it's the same day and time hasn't passed, don't add a week
+    if (daysUntilTraining === 0) {
+        nextTraining.setDate(now.getDate());
+    }
+    
+    const timeDiff = nextTraining.getTime() - now.getTime();
+    
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+    
+    return { days, hours, minutes, seconds };
+};
+
+let currentLocation = null;
+
+const updateCountdownDisplay = () => {
+    const nextDay = getNextTraining();
+    const dayToLocation = {
+        2: 'tuesday',
+        3: 'wednesday', 
+        4: 'thursday',
+        6: 'saturday'
+    };
+    
+    const locationKey = dayToLocation[nextDay];
+    const trainingInfo = trainingSchedule[locationKey];
+    const timeRemaining = calculateTimeRemaining(nextDay);
+    
+    // Update countdown (these change every second)
+    document.getElementById('countdown-days').textContent = timeRemaining.days;
+    document.getElementById('countdown-hours').textContent = timeRemaining.hours;
+    document.getElementById('countdown-minutes').textContent = timeRemaining.minutes;
+    document.getElementById('countdown-seconds').textContent = timeRemaining.seconds;
+    
+    // Only update location info and map if location changed
+    if (currentLocation !== locationKey) {
+        currentLocation = locationKey;
+        
+        document.getElementById('training-location').textContent = trainingInfo.location;
+        document.getElementById('training-address').textContent = trainingInfo.address;
+        document.getElementById('training-time').textContent = trainingInfo.time;
+        
+        updateMap(trainingInfo.lat, trainingInfo.lng, trainingInfo.location);
+    }
+};
+
+const updateMap = (lat, lng, locationName) => {
+    const mapContainer = document.getElementById('training-map');
+    mapContainer.innerHTML = `
+        <iframe 
+            width="100%" 
+            height="300" 
+            frameborder="0" 
+            scrolling="no" 
+            marginheight="0" 
+            marginwidth="0" 
+            src="https://maps.google.com/maps?width=100%25&height=300&hl=en&q=${lat},${lng}&t=&z=14&ie=UTF8&iwloc=&output=embed">
+        </iframe>
+        <div class="map-buttons">
+            <button onclick="openInWaze(${lat}, ${lng})" class="nav-button">Open in Waze</button>
+            <button onclick="openInGoogleMaps(${lat}, ${lng})" class="nav-button">Open in Google Maps</button>
+        </div>
+    `;
+};
+
+const openInWaze = (lat, lng) => {
+    window.open(`https://waze.com/ul?ll=${lat},${lng}&navigate=yes`, '_blank');
+};
+
+const openInGoogleMaps = (lat, lng) => {
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`, '_blank');
+};
+
+// Start the countdown
+const startCountdown = () => {
+    updateCountdownDisplay();
+    setInterval(updateCountdownDisplay, 1000);
+};
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', startCountdown);
 
 
 
