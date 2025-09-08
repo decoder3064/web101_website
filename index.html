@@ -107,48 +107,69 @@
 
             <section id="next-trainings-container">
                 <h2 class="next-trainings-title">PRÓXIMO ENTRENAMIENTO</h2>
+                
                 <div class="countdown-container">
-                    <div class="countdown-left">
-                        <div class="countdown-display">
-                            <div class="time-block">
-                                <span id="countdown-days" class="countdown-number">03</span>
-                                <span class="time-label">DÍAS</span>
-                            </div>
-                            <div class="time-separator">:</div>
-                            <div class="time-block">
-                                <span id="countdown-hours" class="countdown-number">07</span>
-                                <span class="time-label">HORAS</span>
-                            </div>
-                            <div class="time-separator">:</div>
-                            <div class="time-block">
-                                <span id="countdown-minutes" class="countdown-number">52</span>
-                                <span class="time-label">MINUTOS</span>
-                            </div>
+                    <div class="countdown-display">
+                        <div class="countdown-unit">
+                            <span class="countdown-number" id="days">08</span>
+                            <span class="countdown-label">días</span>
                         </div>
-                        <button class="calendar-btn" onclick="addToCalendar()">AGREGAR A MI CALENDARIO</button>
-                        
-                        <div class="map-container">
-                            <div id="training-map"></div>
-                            <div class="map-buttons">
-                                <button onclick="openInWaze()" class="nav-btn waze-btn">ABRIR EN WAZE</button>
-                                <button onclick="openInGoogleMaps()" class="nav-btn maps-btn">ABRIR EN MAPS</button>
-                            </div>
+                        <div class="countdown-unit">
+                            <span class="countdown-number" id="hours">07</span>
+                            <span class="countdown-label">horas</span>
+                        </div>
+                        <div class="countdown-unit">
+                            <span class="countdown-number" id="minutes">52</span>
+                            <span class="countdown-label">minutos</span>
                         </div>
                     </div>
                     
-                    <div class="countdown-right">
-                        <div class="date-display">
-                            <span id="training-day" class="day-number">03</span>
-                            <span id="training-month" class="month-text">JUL</span>
+                    <button id="calendar-button">AGREGAR A MI CALENDARIO</button>
+                </div>
+
+                <div class="event-details">
+                    <div class="map-preview">
+                        <span>Map Preview Placeholder</span>
+                    </div>
+                    
+                    <div class="event-info">
+                        <div class="event-date-time" id="event-display">
+                            03<br>JUL
                         </div>
-                        <div class="time-location">
-                            <span id="training-time" class="time-text">8PM</span>
-                            <span id="training-location" class="location-text">PRESIDENTE<br>PLAZA</span>
+                        <div class="event-location" id="location-display">
+                            8PM<br>PRESIDENTE<br>PLAZA
+                        </div>
+                        
+                        <div class="map-buttons">
+                            <button class="other-button" id = "waze">ABRIR EN WAZE</button>
+                            <button class="other-button" id = "maps">ABRIR EN MAPS</button>
                         </div>
                     </div>
                 </div>
             </section>
-                        
+
+
+
+            <section id="gallery-container">
+                <h2 class="gallery-text">GALERÍA</h2>
+                <div class="gallery-car-container">
+                    <button id="prev"><img src="/img/prev.png"></button>
+
+                    <div id="gallery-viewport">
+
+                        <ul id="gallery-track">
+                            
+                        </ul>
+                    </div>
+                <button id="next"><img src="img/next.png"></button>
+                </div>
+
+                <div class="pagination-dots" id="paginationDots">
+                <!-- Dots will be created by JavaScript -->
+                </div>
+
+            </section>
+             
 
 
             <section id="sponsors-container">

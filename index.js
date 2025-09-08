@@ -15,6 +15,8 @@
   - [ ] Any time between / after
 ***/
 
+
+
 // Step 1: Add your query for the submit RSVP button here
 const button = document.getElementById('rsvp-b');
 
@@ -161,7 +163,6 @@ const initCarousel =() =>{
 
     if (rect.top < window.innerHeight) {
         carItems.style.transform = `translateX(-${moveDistance}px)`;
-        console.log("Moving by:", moveDistance);
     }
 }
 
@@ -295,144 +296,280 @@ document.addEventListener('DOMContentLoaded', loadGallery);
 
 //Count Down 
 // Training schedule data
+// Training schedule data
 const trainingSchedule = {
-    tuesday: { 
-        time: "19:30", 
+    tuesday: {
+        time: 19 * 60 + 30,  // 1170 minutes = 19:30
         location: "Millennium Plaza",
         address: "Millennium Plaza, San Salvador",
         lat: 13.7083,
         lng: -89.2073
     },
-    wednesday: { 
-        time: "19:30", 
+    wednesday: {
+        time: 19 * 60 + 30,  // 1170 minutes = 19:30
         location: "Las Cascadas",
-        address: "Las Cascadas, Antiguo Cuscatlán", 
+        address: "Las Cascadas, Antiguo Cuscatlán",
         lat: 13.6687,
         lng: -89.2578
     },
-    thursday: { 
-        time: "19:30", 
+    thursday: {
+        time: 19 * 60 + 30,  // 1170 minutes = 19:30
         location: "Plaza Presidente",
         address: "Plaza Presidente, San Salvador",
         lat: 13.7025,
         lng: -89.2137
     },
-    saturday: { 
-        time: "06:00", 
+    saturday: {
+        time: 6 * 60 + 0,    // 360 minutes = 06:00
         location: "Multiplaza",
-        address: "Multiplaza, Escalón",
+        address: "Multiplaza",
         lat: 13.7067,
         lng: -89.2323
     }
 };
 
-const getNextTraining = () => {
-    const now = new Date();
-    const dayOfWeek = now.getDay();
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-    
-    const trainingDays = [2, 3, 4, 6]; // Tue, Wed, Thu, Sat
-    
-    for (let i = 0; i < trainingDays.length; i++) {
-        const trainingDay = trainingDays[i];
-        
-        if (dayOfWeek < trainingDay) {
-            return trainingDay;
-        } 
-        else if (dayOfWeek === trainingDay) {
-            const trainingHour = trainingDay === 6 ? 6 : 19;
-            const trainingMinute = trainingDay === 6 ? 0 : 30;
-            
-            if (currentHour < trainingHour || (currentHour === trainingHour && currentMinute < trainingMinute)) {
-                return trainingDay;
-            }
+ const dayNameToNumber = {
+        'sunday': 0, 'monday': 1, 'tuesday': 2, 
+        'wednesday': 3, 'thursday': 4, 'friday': 5, 'saturday': 6
+    };
+
+const getNextTraining = (now) => {
+    const currentTime = now.getHours() * 60 + now.getMinutes(); 
+
+     const dayNames = [
+        'sunday', 'monday', 'tuesday', 
+        'wednesday', 'thursday', 'friday', 'saturday'
+     ];
+
+     const todayName = dayNames[now.getDay()];
+
+
+    if (trainingSchedule[todayName]){
+        const trainingTime = trainingSchedule[todayName].time;
+        if(currentTime < trainingTime){
+            console.log(todayName)
+            return {day: todayName, ...trainingSchedule[todayName]};
         }
-    }
-    
-    return 2; // Next Tuesday
+    };
+
+    for (let i = 1; i <= 7; i++){
+        const nextDayI = (now.getDay() + i) % 7;
+        const nextDayName = dayNames[nextDayI];
+
+        if (trainingSchedule[nextDayName]){
+            console.log(nextDayName)
+            return { day: nextDayName, ...trainingSchedule[nextDayName]}; 
+        }
+    };
+
+    return{day:dayNames[2], ...trainingSchedule[dayNames[2]]};
 };
 
-const calculateTimeRemaining = (nextDay) => {
-    const now = new Date();
-    const nextTraining = new Date();
+
+
+ function minutesToTimeString(minutes) {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+}
+
+
+const calculateTimeRemaining = (nextDay, today) => {
+
+    const todayDayNumber = today.getDay();
+    const targetNumber = dayNameToNumber[nextDay.day];
+
+     let toAdd;
+
+     if(targetNumber > todayDayNumber){
+        toAdd = targetNumber-todayDayNumber;
+     }else if(targetNumber < todayDayNumber){
+        toAdd = (7 - todayDayNumber) + targetNumber;
+     }
+     else{
+        toAdd = 7;
+     }
+
+     const targetDate = new Date(today);
+     targetDate.setDate(today.getDate() + toAdd);
+
+     const trainingHours = Math.floor(nextDay.time / 60);
+     const trainingMinutes = nextDay.time % 60;
+     targetDate.setHours(trainingHours,trainingMinutes, 0, 0);
+
+    const timeDifference = targetDate.getTime() - today.getTime();
+
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
     
-    // Set to next occurrence of the training day
-    const daysUntilTraining = (nextDay - now.getDay() + 7) % 7;
-    nextTraining.setDate(now.getDate() + (daysUntilTraining === 0 ? 7 : daysUntilTraining));
-    
-    // Set training time
-    if (nextDay === 6) {
-        nextTraining.setHours(6, 0, 0, 0); // Saturday 6:00 AM
-    } else {
-        nextTraining.setHours(19, 30, 0, 0); // Other days 7:30 PM
-    }
-    
-    // If it's the same day and time hasn't passed, don't add a week
-    if (daysUntilTraining === 0) {
-        nextTraining.setDate(now.getDate());
-    }
-    
-    const timeDiff = nextTraining.getTime() - now.getTime();
-    
-    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-    
-    return { days, hours, minutes, seconds };
+    return { days, hours, minutes, targetDate};
 };
 
-let currentLocation = null;
+
+
 
 const updateCountdownDisplay = () => {
-    const nextDay = getNextTraining();
-    const dayToLocation = {
-        2: 'tuesday',
-        3: 'wednesday', 
-        4: 'thursday',
-        6: 'saturday'
-    };
+
+     const now = new Date(new Date().toLocaleString("en-US", {
+        timeZone: "America/El_Salvador"
+    }));
     
-    const locationKey = dayToLocation[nextDay];
-    const trainingInfo = trainingSchedule[locationKey];
-    const timeRemaining = calculateTimeRemaining(nextDay);
+    const nextTraining = getNextTraining(now);
+    const timeLeft = calculateTimeRemaining(nextTraining, now);
     
-    // Update countdown (these change every second)
-    document.getElementById('countdown-days').textContent = timeRemaining.days;
-    document.getElementById('countdown-hours').textContent = timeRemaining.hours;
-    document.getElementById('countdown-minutes').textContent = timeRemaining.minutes;
-    document.getElementById('countdown-seconds').textContent = timeRemaining.seconds;
+    document.getElementById('days').textContent = timeLeft.days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = timeLeft.hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = timeLeft.minutes.toString().padStart(2, '0');
     
-    // Only update location info and map if location changed
-    if (currentLocation !== locationKey) {
-        currentLocation = locationKey;
-        
-        document.getElementById('training-location').textContent = trainingInfo.location;
-        document.getElementById('training-address').textContent = trainingInfo.address;
-        document.getElementById('training-time').textContent = trainingInfo.time;
-        
-        updateMap(trainingInfo.lat, trainingInfo.lng, trainingInfo.location);
+    updateEventDisplay(nextTraining,timeLeft)
+    updateMapIfChanged(nextTraining);
+};
+
+let currentTrainingLocation = null;
+
+const updateMapIfChanged = (training) => {
+    if (currentTrainingLocation !== training.location) {
+        updateMap(training.lat, training.lng, training.location);
+        updateMapButtons(training);
+        currentTrainingLocation = training.location;
     }
 };
 
+
+const updateEventDisplay = (training, timeLeft) => {
+    const eventDate = timeLeft.targetDate;
+    
+    // Format date as "03 JUL"
+    const day = eventDate.getDate().toString().padStart(2, '0');
+    const month = eventDate.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+    
+    // Convert to 12-hour format
+    const hour = Math.floor(training.time / 60);
+    const minute = training.time % 60;
+    let timeString;
+    
+    if (hour === 0) {
+        timeString = minute === 0 ? "12AM" : `12:${minute.toString().padStart(2, '0')}AM`;
+    } else if (hour < 12) {
+
+        timeString = minute === 0 ? `${hour}AM` : `${hour}:${minute.toString().padStart(2, '0')}AM`;
+    } else if (hour === 12) {
+
+        timeString = minute === 0 ? "12PM" : `12:${minute.toString().padStart(2, '0')}PM`;
+    } else {
+
+        const hour12 = hour - 12;
+        timeString = minute === 0 ? `${hour12}PM` : `${hour12}:${minute.toString().padStart(2, '0')}PM`;
+    }
+    
+
+    const locationParts = training.location.toUpperCase().split(' ');
+    let locationDisplay;
+    
+    if (locationParts.length >= 2) {
+        locationDisplay = `${timeString}<br>${locationParts.join('<br>')}`;
+    } else {
+        locationDisplay = `${timeString}<br>${locationParts[0]}`;
+    }
+    
+
+    document.getElementById('event-display').innerHTML = `${day}<br>${month}`;
+    document.getElementById('location-display').innerHTML = locationDisplay;
+    
+
+    updateMapIfChanged(training);
+    updateCalendarButton(training, timeLeft);
+};
+
+const addToCalendar = (training, targetDate) => {
+    // Format date for calendar (YYYYMMDDTHHMMSS)
+    const year = targetDate.getFullYear();
+    const month = (targetDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = targetDate.getDate().toString().padStart(2, '0');
+    const hour = targetDate.getHours().toString().padStart(2, '0');
+    const minute = targetDate.getMinutes().toString().padStart(2, '0');
+    
+    const startDate = `${year}${month}${day}T${hour}${minute}00`;
+    
+    const endTime = new Date(targetDate.getTime() + 60 * 60 * 1000);
+    const endYear = endTime.getFullYear();
+    const endMonth = (endTime.getMonth() + 1).toString().padStart(2, '0');
+    const endDay = endTime.getDate().toString().padStart(2, '0');
+    const endHour = endTime.getHours().toString().padStart(2, '0');
+    const endMinute = endTime.getMinutes().toString().padStart(2, '0');
+    
+    const endDate = `${endYear}${endMonth}${endDay}T${endHour}${endMinute}00`;
+    
+    // Create Google Calendar URL
+    const title = `Entrenamiento Entre Runners - ${training.location}`;
+    const details = `Entrenamiento grupal de running en ${training.location}`;
+    const location = training.address;
+    
+    const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
+    
+    window.open(calendarUrl, '_blank');
+};
+
+
+
+const updateCalendarButton = (training, timeLeft) => {
+    const calendarBtn = document.getElementById('calendar-button');
+    calendarBtn.onclick = () => addToCalendar(training, timeLeft.targetDate);
+};
+
+
 const updateMap = (lat, lng, locationName) => {
-    const mapContainer = document.getElementById('training-map');
+    const mapContainer = document.querySelector('.map-preview');
+    
+    // Create a cleaner map design similar to PDF
     mapContainer.innerHTML = `
-        <iframe 
-            width="100%" 
-            height="300" 
-            frameborder="0" 
-            scrolling="no" 
-            marginheight="0" 
-            marginwidth="0" 
-            src="https://maps.google.com/maps?width=100%25&height=300&hl=en&q=${lat},${lng}&t=&z=14&ie=UTF8&iwloc=&output=embed">
-        </iframe>
-        <div class="map-buttons">
-            <button onclick="openInWaze(${lat}, ${lng})" class="nav-button">Open in Waze</button>
-            <button onclick="openInGoogleMaps(${lat}, ${lng})" class="nav-button">Open in Google Maps</button>
+        <div style="
+            width: 100%; 
+            height: 100%; 
+            border-radius: 15px; 
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            position: relative;
+            overflow: hidden;
+        ">
+            <iframe 
+                width="100%" 
+                height="100%" 
+                frameborder="0" 
+                style="border: none; border-radius: 15px;"
+                src="https://maps.google.com/maps?q=${lat},${lng}&t=m&z=15&output=embed&iwloc=addr=&z=15"
+                title="Map of ${locationName}">
+            </iframe>
+            <div style="
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background: rgba(255,255,255,0.9);
+                padding: 8px 12px;
+                border-radius: 8px;
+                font-family: 'Montserrat', sans-serif;
+                font-size: 12px;
+                font-weight: 600;
+                color: #333;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            ">
+                📍 ${locationName}
+            </div>
         </div>
     `;
+};
+
+const updateMapButtons = (training) => {
+
+    const wazeBtn = document.getElementById("waze"); // First button (ABRIR EN WAZE)
+    const mapsBtn = document.querySelectorAll("maps"); // Second button (ABRIR EN MAPS)
+    
+    if (wazeBtn) {
+        wazeBtn.onclick = () => openInWaze(training.lat, training.lng);
+    }
+    if (mapsBtn) {
+        wazeBtn.onclick = () => openInGoogleMaps(training.lat, training.lng);
+    }
 };
 
 const openInWaze = (lat, lng) => {
@@ -449,8 +586,9 @@ const startCountdown = () => {
     setInterval(updateCountdownDisplay, 1000);
 };
 
-// Initialize when page loads
 document.addEventListener('DOMContentLoaded', startCountdown);
+
+
 
 
 
