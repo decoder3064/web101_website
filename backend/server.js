@@ -32,7 +32,7 @@ app.listen(port, ()=>{
 app.get('/api/gallery-images', async (req, res) =>{
    try{
     const auth = new google.auth.GoogleAuth({
-        keyFile: path.join(__dirname, 'google-credentials.json'),
+        credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
         scopes: ['https://www.googleapis.com/auth/drive.readonly']
 
     });
