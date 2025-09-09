@@ -75,7 +75,7 @@ const validateForm = (event) => {
     }
 
     if(!containsErrors){
-        fetch(`http://localhost:3000/api/contact`, {
+        fetch(`https://entre-runners-production.up.railway.app/api/contact`, {
             method: "POST", 
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -183,7 +183,7 @@ nextTrainings.addEventListener('click',() => {
 
 //Load images to gallery
 const loadGallery = () =>{
-    fetch(`http://localhost:3000/api/gallery-images`).then(response =>{
+    fetch(`https://entre-runners-production.up.railway.app/api/gallery-images`).then(response =>{
         if(response.ok){
             return response.json()
         }
