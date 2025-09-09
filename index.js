@@ -562,13 +562,13 @@ const updateMap = (lat, lng, locationName) => {
 const updateMapButtons = (training) => {
 
     const wazeBtn = document.getElementById("waze"); // First button (ABRIR EN WAZE)
-    const mapsBtn = document.querySelectorAll("maps"); // Second button (ABRIR EN MAPS)
+    const mapsBtn = document.getElementById("maps"); // Second button (ABRIR EN MAPS)
     
     if (wazeBtn) {
         wazeBtn.onclick = () => openInWaze(training.lat, training.lng);
     }
     if (mapsBtn) {
-        wazeBtn.onclick = () => openInGoogleMaps(training.lat, training.lng);
+        mapsBtn.onclick = () => openInGoogleMaps(training.lat, training.lng);
     }
 };
 
