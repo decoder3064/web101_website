@@ -666,7 +666,7 @@ const startCountdown = () => {
     setInterval(updateCountdownDisplay, 1000);
 };
 
-document.addEventListener('DOMContentLoaded', startCountdown);
+document.addEventListener('DOMContentLoaded', startCountdown); 
 
 
 
