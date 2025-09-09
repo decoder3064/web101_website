@@ -19,6 +19,14 @@ app.use((req, res, next) => {
     next();
 });
 
+// Add this near the top, after your existing middleware
+app.use(express.static(path.join(__dirname, '..')));
+
+// Add this route to serve your main HTML file
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'index.html'));
+});
+
 
 app.get('/api/test',(req,res)=>{
     res.json({message: "Server is working!", status: "success"})
