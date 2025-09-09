@@ -174,15 +174,10 @@ window.addEventListener('scroll',initCarousel)
 
 
 // Test API Connection
-apiTestButton = document.getElementById('header-button');
+nextTrainings = document.getElementById('header-button');
 
-apiTestButton.addEventListener('click',() => {
-    fetch(`http://localhost:3000/api/test`).then(response =>{
-        if(response.ok){
-            return response.json();
-        }
-        else{return `Naur bro this aint working`};
-    }).then(data => console.log(data));
+nextTrainings.addEventListener('click',() => {
+    window.open('https://docs.google.com/spreadsheets/d/1KfJ8qpCIJ0e-zB9wlG2dP92Y_cxHrBOHhmBVqD-JH1c/edit?usp=sharing', '_blank');
 });
 
 
@@ -199,27 +194,7 @@ const loadGallery = () =>{
         }
     )};
 
-
-const updateGalleryHTML = (images) =>{
-    let counter = 0; 
-    const track = document.getElementById('gallery-track');
-    track.innerHTML = '';
-    newLi = null;
-
-    for(let i = 0; i < images.length; i++){
-        if(i % 8 === 0){
-            newLi = document.createElement('li');
-            newLi.id = 'gallery-page';
-            track.appendChild(newLi);
-        }
-        let img = document.createElement('img');
-        img.src = images[i].url;
-        img.classList.add('gallery-item');
-        newLi.appendChild(img);
-    }
-
-};
-
+// Replace your existing initGalCarousel function with this improved version
 
 const initGalCarousel = (images) => {
     const track = document.getElementById('gallery-track');
@@ -228,22 +203,40 @@ const initGalCarousel = (images) => {
     const dotsContainer = document.getElementById('paginationDots');
 
     if (!track || !prevBtn || !nextBtn || !dotsContainer) {
-    console.error('Required DOM elements not found');
-    return;
+        console.error('Required DOM elements not found');
+        return;
     }
 
     let currentPage = 0;
-    const pageWidth = 1250;
+    
+    // Get actual page width without gap for proper positioning
+    const getActualPageWidth = () => {
+        if (window.innerWidth <= 480) {
+            return 300;
+        } else if (window.innerWidth <= 767) {
+            return 350;
+        } else {
+            return 1200;
+        }
+    };
+    
+    // Get gap size
+    const getGap = () => {
+        return 50; // Consistent 50px gap
+    };
+    
     const totalPages = Math.ceil(images.length / 8);
 
-    const createDots = () =>{
+    const createDots = () => {
         dotsContainer.innerHTML = '';
-        for(let i=0; i<totalPages;i++){
+        for(let i = 0; i < totalPages; i++){
             const dot = document.createElement('div');
             dot.classList.add('pagination-dot');
-            if(i === 0){dot.classList.add('active');}
+            if(i === 0){
+                dot.classList.add('active');
+            }
             
-            dot.addEventListener('click',() => {
+            dot.addEventListener('click', () => {
                 moveToPage(i);
             });
 
@@ -251,10 +244,9 @@ const initGalCarousel = (images) => {
         }
     };
 
-
-    const updateDots = () =>{
+    const updateDots = () => {
         const dots = document.querySelectorAll('.pagination-dot');
-        dots.forEach((dot,index)=>{
+        dots.forEach((dot, index) => {
             if(index === currentPage){
                 dot.classList.add('active');
             } else{
@@ -263,35 +255,123 @@ const initGalCarousel = (images) => {
         });
     };
 
-    const moveToPage =(pageNumber)=>{
-        const moveDistance = pageNumber * pageWidth;
+    const moveToPage = (pageNumber) => {
+        let moveDistance = 0;
+        
+        if (pageNumber > 0) {
+            const viewport = document.getElementById('gallery-viewport');
+            const viewportWidth = viewport.offsetWidth;
+            
+            // Check if we're on mobile or desktop
+            if (window.innerWidth <= 767) {
+                // Mobile: no gap, just move by viewport width
+                moveDistance = pageNumber * viewportWidth;
+            } else {
+                // Desktop: include 50px gap
+                moveDistance = pageNumber * (viewportWidth + 50);
+            }
+        }
+        
+        // Ensure we don't go beyond available pages
+        if (pageNumber < 0) pageNumber = 0;
+        if (pageNumber >= totalPages) pageNumber = totalPages - 1;
+        
         track.style.transform = `translateX(-${moveDistance}px)`;
         currentPage = pageNumber;
 
+        // Update button states
         prevBtn.disabled = currentPage === 0;
-        nextBtn.disabled = currentPage === totalPages -1;
+        nextBtn.disabled = currentPage === totalPages - 1;
+        
+        // Add visual feedback for disabled buttons
+        if (prevBtn.disabled) {
+            prevBtn.style.opacity = '0.5';
+            prevBtn.style.cursor = 'not-allowed';
+        } else {
+            prevBtn.style.opacity = '1';
+            prevBtn.style.cursor = 'pointer';
+        }
+        
+        if (nextBtn.disabled) {
+            nextBtn.style.opacity = '0.5';
+            nextBtn.style.cursor = 'not-allowed';
+        } else {
+            nextBtn.style.opacity = '1';
+            nextBtn.style.cursor = 'pointer';
+        }
+        
         updateDots();
     };
 
-    nextBtn.addEventListener('click', () =>{
+    // Next button event listener
+    nextBtn.addEventListener('click', () => {
         if(currentPage < totalPages - 1){
             currentPage++;
             moveToPage(currentPage);
         }
     });
 
-    prevBtn.addEventListener('click', () =>{
+    // Previous button event listener
+    prevBtn.addEventListener('click', () => {
         if(currentPage > 0){
             currentPage--;
             moveToPage(currentPage);
         }
     });
 
+    // Handle window resize to recalculate positions
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            moveToPage(currentPage); // Recalculate position on resize
+        }, 250);
+    });
+
+    // Initialize
     createDots();
     moveToPage(0);
+};
 
-}
+// Also update your updateGalleryHTML function to ensure proper structure
+const updateGalleryHTML = (images) => {
+    const track = document.getElementById('gallery-track');
+    track.innerHTML = '';
     
+    // Calculate total pages needed
+    const imagesPerPage = 8;
+    const totalPages = Math.ceil(images.length / imagesPerPage);
+    
+    for(let page = 0; page < totalPages; page++){
+        const newLi = document.createElement('li');
+        newLi.id = 'gallery-page';
+        
+        // Calculate start and end indices for this page
+        const startIndex = page * imagesPerPage;
+        const endIndex = Math.min(startIndex + imagesPerPage, images.length);
+        
+        // Add images to this page
+        for(let i = startIndex; i < endIndex; i++){
+            const img = document.createElement('img');
+            img.src = images[i].url;
+            img.classList.add('gallery-item');
+            img.alt = `Gallery image ${i + 1}`;
+            
+            // Add error handling for broken images
+            img.onerror = function() {
+                console.warn(`Failed to load image: ${this.src}`);
+                this.style.display = 'none';
+            };
+            
+            newLi.appendChild(img);
+        }
+        
+        track.appendChild(newLi);
+    }
+};
+
+
+
 document.addEventListener('DOMContentLoaded', loadGallery);
 
 //Count Down 
