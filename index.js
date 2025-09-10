@@ -379,32 +379,32 @@ document.addEventListener('DOMContentLoaded', loadGallery);
 // Training schedule data
 const trainingSchedule = {
     tuesday: {
-        time: 19 * 60 + 30,  // 1170 minutes = 19:30
+        time: 19 * 60 + 30,  // 7:30 PM
         location: "Millennium Plaza",
-        address: "Millennium Plaza, San Salvador",
-        lat: 13.7083,
-        lng: -89.2073
+        address: "P.º Gral. Escalón 3675, San Salvador, El Salvador",
+        lat: 13.6925,
+        lng: -89.2310
     },
     wednesday: {
-        time: 19 * 60 + 30,  // 1170 minutes = 19:30
+        time: 19 * 60 + 30,  // 7:30 PM
         location: "Las Cascadas",
-        address: "Las Cascadas, Antiguo Cuscatlán",
+        address: "C. El Pedregal, Cd Merliot, El Salvador",
         lat: 13.6687,
         lng: -89.2578
     },
     thursday: {
-        time: 19 * 60 + 30,  // 1170 minutes = 19:30
+        time: 19 * 60 + 30,  // 7:30 PM
         location: "Plaza Presidente",
-        address: "Plaza Presidente, San Salvador",
+        address: "Av. De La Revolución, San Salvador, El Salvador",
         lat: 13.7025,
         lng: -89.2137
     },
     saturday: {
-        time: 6 * 60 + 0,    // 360 minutes = 06:00
+        time: 6 * 60 + 0,    // 6:00 AM
         location: "Multiplaza",
-        address: "Multiplaza",
-        lat: 13.7067,
-        lng: -89.2323
+        address: "Carr. Panamericana, San Salvador, El Salvador",
+        lat: 13.6589,
+        lng: -89.2656
     }
 };
 
