@@ -455,19 +455,23 @@ const getNextTraining = (now) => {
 
 
 const calculateTimeRemaining = (nextDay, today) => {
-
     const todayDayNumber = today.getDay();
     const targetNumber = dayNameToNumber[nextDay.day];
 
      let toAdd;
 
      if(targetNumber > todayDayNumber){
-        toAdd = targetNumber-todayDayNumber;
-     }else if(targetNumber < todayDayNumber){
+        toAdd = targetNumber - todayDayNumber;
+     } else if(targetNumber < todayDayNumber){
         toAdd = (7 - todayDayNumber) + targetNumber;
-     }
-     else{
-        toAdd = 7;
+     } else {
+        // Same day - check if training time has passed
+        const currentTime = today.getHours() * 60 + today.getMinutes();
+        if(currentTime < nextDay.time){
+            toAdd = 0; // Today's training hasn't happened yet
+        } else {
+            toAdd = 7; // Today's training passed, next week
+        }
      }
 
      const targetDate = new Date(today);
