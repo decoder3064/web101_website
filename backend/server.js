@@ -76,7 +76,7 @@ app.post('/api/contact', async (req, res) =>{
          const {name, email, message} = req.body;
          console.log(process.env.EMAIL_USER);
 
-        const transporter = nodemailer.createTransporter({
+        const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 587,
             secure: false, // true for 465, false for other ports
