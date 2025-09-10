@@ -76,12 +76,20 @@ app.post('/api/contact', async (req, res) =>{
          const {name, email, message} = req.body;
          console.log(process.env.EMAIL_USER);
 
-         const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth : {
-                user : process.env.EMAIL_USER,
-                pass : process.env.EMAIL_PASS
-            }
+        const transporter = nodemailer.createTransporter({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            },
+            tls: {
+                rejectUnauthorized: false
+            },
+            connectionTimeout: 60000, // 60 seconds
+            greetingTimeout: 30000,   // 30 seconds
+            socketTimeout: 60000      // 60 seconds
         });
 
             const emailSent = await transporter.sendMail({
