@@ -14,9 +14,12 @@ A modern, responsive website for the Entre Runners community in El Salvador - co
 
 ### User Experience
 - **Modern UI/UX**: Clean, athletic design with custom fonts (Bebas Neue, Montserrat)
-- **Smooth Animations**: CSS transitions and JavaScript-powered scroll effects
-- **Modal Feedback**: Success confirmation modals with personalized messages
-- **Navigation**: Smooth scrolling navigation bar with section anchors
+- **Smooth Animations**: CSS transitions, scroll-triggered carousel, rotating modal elements
+- **Advanced Form Validation**: Real-time validation with visual error feedback
+- **Modal Feedback**: Animated success modals with personalized messages
+- **Timezone-Aware Countdown**: Automatic countdown calculation for El Salvador timezone
+- **Dynamic Content**: Auto-updating maps and event details based on training schedule
+- **Touch-Friendly Navigation**: Optimized for mobile interaction with swipe gestures
 
 ## 🛠 Tech Stack
 
@@ -28,33 +31,45 @@ A modern, responsive website for the Entre Runners community in El Salvador - co
 
 ### Backend
 - **Node.js**: Server-side JavaScript runtime
-- **Express.js**: Web application framework
-- **Google Drive API**: Dynamic image gallery management
-- **Nodemailer**: Email service integration
+- **Express.js v5.1.0**: Web application framework with static file serving
+- **Google APIs v126.0.1**: Google Drive integration for dynamic gallery
+- **Nodemailer v7.0.6**: Email service integration with Gmail SMTP
 - **dotenv**: Environment variable management
+- **CORS Middleware**: Cross-origin request handling
 
 ### APIs & Services
-- **Google Drive API**: For gallery image management
-- **Gmail SMTP**: For contact form email delivery
-- **Google Maps Embed**: For location display
-- **Google Calendar**: For training event integration
+- **Google Drive API**: Dynamic image gallery management with folder-based organization
+- **Gmail SMTP**: Contact form email delivery with confirmation emails
+- **Google Maps Embed**: Interactive location display with navigation links
+- **Google Calendar**: Training event integration for calendar reminders
+- **Waze Integration**: Direct navigation links for training locations
 
 ## 📁 Project Structure
 
 ```
 entre-runners/
 ├── backend/
-│   ├── server.js          # Express server configuration
+│   ├── server.js          # Express server with API endpoints
 │   ├── package.json       # Backend dependencies
 │   ├── package-lock.json  # Dependency lock file
-│   └── .gitignore        # Git ignore rules
+│   └── .gitignore        # Git ignore (node_modules, credentials, .env)
+├── .vscode/
+│   └── settings.json     # VSCode configuration
 ├── img/                   # Static images and assets
 ├── index.html            # Main HTML structure
 ├── styles.css            # Main stylesheet with responsive design
 ├── index.js              # Frontend JavaScript functionality
 ├── site.webmanifest      # PWA configuration
+├── package.json          # Root package.json for deployment
 └── README.md             # Project documentation
 ```
+
+## 🔌 API Endpoints
+
+- **GET /**: Serves the main application
+- **GET /api/test**: Server health check endpoint
+- **GET /api/gallery-images**: Fetches images from Google Drive folder
+- **POST /api/contact**: Handles contact form submissions with email delivery
 
 ## 🚀 Getting Started
 
@@ -84,15 +99,16 @@ entre-runners/
    PORT=3000
    GOOGLE_CREDENTIALS={"type":"service_account",...} # Your Google Service Account JSON
    EMAIL_USER=your-gmail@gmail.com
-   EMAIL_PASS=your-app-password
+   EMAIL_PASS=your-app-password # Use Gmail App Password, not regular password
    EMAIL_TO=contact@entrerunners.com
    ```
 
 4. **Google Cloud Setup**
    - Create a Google Cloud project
    - Enable Google Drive API
-   - Create a service account and download credentials
-   - Share your Google Drive folder with the service account email
+   - Create a service account and download credentials JSON
+   - Share your Google Drive folder (ID: 1UIcXGf1M09J5wMORI9xjX0Sjd3B3MBA2) with the service account email
+   - Copy the service account JSON content to GOOGLE_CREDENTIALS env variable
 
 5. **Start the development server**
    ```bash
@@ -122,21 +138,26 @@ Configure SMTP settings in your `.env` file. The system sends:
 
 ### Gallery Management
 Images are managed through Google Drive:
-1. Upload images to the specified Google Drive folder
-2. The API automatically fetches and displays them
-3. Images are displayed in a responsive carousel format
+1. Upload images to the specified Google Drive folder (ID: 1UIcXGf1M09J5wMORI9xjX0Sjd3B3MBA2)
+2. The API automatically fetches and displays them via googleapis
+3. Images are displayed in a responsive carousel with pagination dots
+4. Supports automatic grid layout (4x2 on desktop, 2x4 on mobile)
+5. Includes error handling for failed image loads
 
 ## 🎨 Customization
 
 ### Styling
 - **CSS Variables**: Color scheme defined in `:root` for easy theming
-- **Responsive Breakpoints**: Mobile-first approach with defined breakpoints
-- **Typography**: Custom font loading with fallbacks
+- **Responsive Breakpoints**: Mobile-first approach with 6 defined breakpoints
+- **Typography**: Custom font loading (Bebas Neue, Montserrat) with system fallbacks
+- **Animation System**: Scroll-triggered animations and hover effects
 
 ### Content
-- Update training locations in the `trainingSchedule` object
-- Modify sponsor logos in the HTML
-- Customize form validation rules in the JavaScript
+- Update training locations in the `trainingSchedule` object (index.js lines 410+)
+- Modify sponsor logos in the sponsors section of index.html
+- Customize form validation rules in the `validateForm` function
+- Update Google Drive folder ID in server.js for different image sources
+- Modify countdown timer locations and times in the training schedule
 
 ## 📱 Responsive Design
 
@@ -151,26 +172,30 @@ The website is optimized for multiple screen sizes:
 
 ## 🔐 Security
 
-- Input validation on both client and server side
-- CORS configuration for cross-origin requests
-- Environment variable protection for sensitive data
-- Error handling to prevent information leakage
+- **Input validation**: Both client-side and server-side form validation
+- **CORS configuration**: Controlled cross-origin request handling
+- **Environment variables**: Sensitive data protected in .env files
+- **Error handling**: Graceful error handling without information leakage
+- **Email validation**: Comprehensive email format and domain validation
+- **Rate limiting**: Natural rate limiting through form submission flow
 
 ## 🚀 Deployment
 
 ### Production Checklist
-- [ ] Set production environment variables
-- [ ] Configure HTTPS
-- [ ] Optimize images and assets
-- [ ] Set up monitoring and logging
-- [ ] Configure domain and DNS
+- [ ] Set production environment variables (Railway, Heroku, etc.)
+- [ ] Configure HTTPS and SSL certificates
+- [ ] Optimize images and compress assets
+- [ ] Set up monitoring and error logging
+- [ ] Configure custom domain and DNS
+- [ ] Test email functionality in staging environment
+- [ ] Verify Google Drive API quotas and limits
 
 ### Platform Deployment
-The application can be deployed to:
-- **Railway**: Current production platform
-- **Heroku**: Popular PaaS option
-- **Vercel**: Great for static sites with API routes
-- **DigitalOcean**: VPS deployment option
+The application is configured for multiple platforms:
+- **Railway**: Current production deployment (https://entre-runners-production.up.railway.app/)
+- **Heroku**: Easy deployment with git integration
+- **Vercel**: Excellent for static sites with serverless functions
+- **DigitalOcean**: VPS deployment with full control
 
 ## 🤝 Contributing
 
@@ -186,20 +211,8 @@ This project is licensed under the ISC License - see the `package.json` file for
 
 ## 📞 Contact
 
-- **Website**: [entrerunners.com](https://entrerunners.com)
 - **Instagram**: [@entrerunners](https://www.instagram.com/entrerunners)
 - **Facebook**: [Entre Runners El Salvador](https://www.facebook.com/entrerunners.sv/)
 
-## 🎯 Future Enhancements
-
-- [ ] User authentication and profiles
-- [ ] Training session registration system
-- [ ] Mobile app integration
-- [ ] Performance tracking features
-- [ ] Community forum
-- [ ] Event calendar with recurring sessions
-- [ ] Push notifications for training reminders
-
----
 
 **Built with ❤️ for the running community in El Salvador**
